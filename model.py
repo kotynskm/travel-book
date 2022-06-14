@@ -15,7 +15,10 @@ class User(db.Model):
     email = db.Column(db.String(40), nullable=False, unique=True)
     password = db.Column(db.String(40), nullable=False)
 
-    trip = db.relationship('Trip', back_populates='user')
+    trips = db.relationship('Trip', back_populates='user')
+
+    def __repr__(self):
+        return f'<User {self.fname} password {self.password} email {self.email} lastname {self.lname}>'
 
     @classmethod
     def get_by_id(cls, user_id):
@@ -33,9 +36,6 @@ class User(db.Model):
         return cls(fname=fname, lname=lname, email=email, password=password)
 
 
-    def __repr__(self):
-        return f'<User {self.fname} password {self.password} email {self.email} lastname {self.lname}>'
-
 class Trip(db.Model):
     """ Data model for a trip. """
 
@@ -48,11 +48,19 @@ class Trip(db.Model):
     start_date = db.Column(db.Date, nullable=False)
     end_date = db.Column(db.Date, nullable=False)
 
-    user = db.relationship('User', back_populates='trip')
-    activities = db.relationship('Activity', back_populates='trips')
+    user = db.relationship('User', back_populates='trips')
+    activities = db.relationship('Activity', back_populates='trip')
 
     def __repr__(self):
         return f'<Trip {self.trip_id} Name {self.trip_name} City {self.city}>'
+
+    @classmethod
+    def create_trip(cls, user_id, trip_name, city, start_date, end_date):
+        """ Create a trip. """
+        return cls(user_id=user_id, trip_name=trip_name, city=city, start_date=start_date, end_date=end_date)
+
+
+    
 
 class Activity(db.Model):
     """ Data model for an activity. """
@@ -64,7 +72,7 @@ class Activity(db.Model):
     yelp_id = db.Column(db.String(100))
 
     
-    trips = db.relationship('Trip', back_populates='activities')
+    trip = db.relationship('Trip', back_populates='activities')
 
     def __repr__(self):
         return f'<Activity {self.activity_id} Type {self.activity_category} Rating {self.rating}'

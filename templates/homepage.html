@@ -1,4 +1,29 @@
 {% extends 'base.html' %}
 {% block body %}
-    <p>Hello {{ email }} your password is {{ password }}</p>
+    <div class="container">
+        <div class="create-trip">
+        <form action="/create-trip" method="POST">
+            <label for="city">Choose a city</label><br>
+            <input type="text" name="city" id="city"></br>
+            <label for="trip-name">Name your trip</label><br>
+            <input type="text" name="trip-name" id="trip-name"></br>
+            <label for="start-date">Enter a start date</label><br>
+            <input type="date" name="start" id="start"></br>
+            <label for="end-date">Enter an end date</label><br>
+            <input type="date" name="end" id="end"></br>
+            <button class="create-trip" type="submit">Submit</button>
+        </form>
+        </div>
+
+        <div class="trip-loop">
+            <ul>
+                {% for trip in trips %}
+                  <li><a href="/api/activities">{{ trip.city }}</a></li>
+                {% endfor %}
+              </ul>
+        </div>
+
+
+        </div>
+    
 {% endblock %}
