@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+    {% block body %}
+
+    <div class="bg">
+
+        <div class="login">
+        <div class="login-window">
+            <h3>Travel Book</h3>
+            <h4>Login</h4>
+            <form action="/login" method="POST">
+                <label for="email">Email</label><br>
+                <input type="text" id="email" name="email"><br>
+                <label for="password">Password</label><br>
+                <input type="password" id="password" name="password"><br><br>
+                <button class="login-button" type="submit">Submit</button>
+                </form>
+                 <!-- Flash messages -->
+                 <div class="flash_msg">
+              {% for msg in get_flashed_messages() %}
+                  <span>{{ msg }}</span>
+              {% endfor %}
+              </div>
+        </div>
+        
+        <div class="create-window">Don't have an account yet? Register here: <a href="/register">Create Account</a>
+
+        </div>
+        </div>
+
+    </div>
+    {% endblock %}
+  
