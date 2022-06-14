@@ -35,7 +35,7 @@ def get_login_info():
         session['user_id'] = user.user_id
         flash(f'Welcome back, {user.fname}!')
 
-    return render_template('homepage.html')
+    return redirect('/homepage')
 
 @app.route('/register')
 def show_registration_page():
