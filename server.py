@@ -91,7 +91,21 @@ def user_page():
     
     return render_template('homepage.html',trips=trips)
 
+@app.route('/api/activities')
+def show_activities():
+    # makes a call to yelp API to display activites in that city
+    # I need to be able to pull which city it is referring to and pass it into the API call
+    # trip = Trip.get_by_id() ??
+    url = 'https://api.yelp.com/v3/businesses/search'
+    headers = {'Authorization': 'Bearer %s' % YELP_API_KEY}
+    location = 'Seattle, WA'
+    params = {'location': location, 'limit':10,'sort_by':'rating'}
 
+    res = requests.get(url,headers=headers,params=params)
+    data = res.json()
+
+    # renders activity page
+    return render_template('activities.html', data=data)
 
 if __name__ == '__main__':
     connect_to_db(app)

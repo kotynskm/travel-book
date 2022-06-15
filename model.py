@@ -59,6 +59,10 @@ class Trip(db.Model):
         """ Create a trip. """
         return cls(user_id=user_id, trip_name=trip_name, city=city, start_date=start_date, end_date=end_date)
 
+    @classmethod
+    def get_by_id(cls, trip_id):
+        """ Get trip by ID. """
+        return cls.query.get(trip_id)
 
     
 
