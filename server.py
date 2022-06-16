@@ -78,18 +78,18 @@ def create_trip():
     start_date_converted = datetime.strptime(start_date, '%Y-%m-%d')
     end_date_converted = datetime.strptime(end_date, '%Y-%m-%d')
     # create trip and add it to database, check if trip already exists - this is not working right now
-    user = User.get_by_id(user_id)
-    user_trips = user.trips
-    for trip in user_trips:
-        if trip_name == trip.trip_name:
-            flash("Trip already exists!")
-        else:
-            trip = Trip.create_trip(user_id, trip_name, city, start_date_converted, end_date_converted)
-            db.session.add(trip)
-            db.session.commit()
-            flash("Trip created!")
+    # user = User.get_by_id(user_id)
+    # user_trips = user.trips
+    # for trip in user_trips:
+    #     if trip_name == trip.trip_name:
+    #         flash("Trip already exists!")
+    #     else:
+    trip = Trip.create_trip(user_id, trip_name, city, start_date_converted, end_date_converted)
+    db.session.add(trip)
+    db.session.commit()
+    flash("Trip created!")
 
-            return redirect('/homepage')
+    return redirect('/homepage')
 
 @app.route('/homepage')
 def user_page():
@@ -142,6 +142,21 @@ def show_restaurants(trip_id):
     data = res.json()
 
     return render_template('restaurants.html', data=data, trip=trip)
+
+@app.route('/create-activity/<trip_id>', methods=['POST'])
+def create_activity(trip_id):
+    """ Create an activity for a trip. """
+    trip = Trip.get_by_id(trip_id)
+    yelp_id = request.form.get('yelp_id')
+    name = request.form.getlist('business')
+
+    activity = Activity.create_activity(trip.trip_id, yelp_id, name)
+    db.session.add(activity)
+    db.session.commit()
+    flash("Activities added!")
+
+    return redirect(f'/trip/{trip_id}')
+
 
 
 if __name__ == '__main__':

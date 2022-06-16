@@ -1,4 +1,5 @@
 """ Data models for travel book itinerary app. """
+from unicodedata import name
 from flask_sqlalchemy import SQLAlchemy
 from datetime import date
 
@@ -74,11 +75,12 @@ class Activity(db.Model):
     activity_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
     trip_id = db.Column(db.Integer, db.ForeignKey('trips.trip_id'))
     yelp_id = db.Column(db.String(100))
+    name = db.Column(db.String(100))
 
     @classmethod
-    def create_activity(cls, trip_id, yelp_id):
+    def create_activity(cls, trip_id, yelp_id, name):
         """ Create an activity. """
-        return cls(trip_id=trip_id, yelp_id=yelp_id)
+        return cls(trip_id=trip_id, yelp_id=yelp_id, name=name)
     
     trip = db.relationship('Trip', back_populates='activities')
 
