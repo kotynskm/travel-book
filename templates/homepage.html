@@ -2,7 +2,8 @@
 {% block body %}
     <div class="container">
         <div class="create-trip">
-        <form action="/create-trip" method="POST">
+            <h3>Create a new trip</h3>
+            <form action="/create-trip" method="POST">
             <label for="city">Choose a city</label><br>
             <input type="text" name="city" id="city"></br>
             <label for="trip-name">Name your trip</label><br>
@@ -16,22 +17,15 @@
         </div>
 
         <div class="trip-loop">
-            <!-- <form action="/api/activities"> -->
-            <!-- my original idea was to loop over trips as a bullet list, but how do I get the city out of a jinja ? -->
             <h3>Current trips planned</h3>
             <ul>
                 {% for trip in trips %}
-                  <input name="city" type="hidden" value="{{trip.city}}">
+                <div class="trip">
                   <li><a href="/trip/{{ trip.trip_id }}">{{ trip.city }}</a></li>
+                  <img src="../static/img/{{trip_image}}">
+                </div>
                 {% endfor %}
             </ul>
-            <!-- <select> -->
-            <!-- {% for trip in trips %}
-            <option value="{{trip.city}}" name="{{trip.city}}">{{trip.city}}</option>
-            {% endfor %} -->
-            <!-- <input type="text" name="seattle">
-            <input type="submit"> -->
-            <!-- </select> -->
 
             </form>
         </div>

@@ -75,6 +75,10 @@ class Activity(db.Model):
     trip_id = db.Column(db.Integer, db.ForeignKey('trips.trip_id'))
     yelp_id = db.Column(db.String(100))
 
+    @classmethod
+    def create_activity(cls, trip_id, yelp_id):
+        """ Create an activity. """
+        return cls(trip_id=trip_id, yelp_id=yelp_id)
     
     trip = db.relationship('Trip', back_populates='activities')
 

@@ -6,7 +6,7 @@ from model import User, Trip, Activity, connect_to_db, db
 from datetime import datetime
 from random import choice
 
-TRIP_IMAGES = [] # populate with images, then use random to send an img to trip_details through /trip/ route
+TRIP_IMAGES = ['airplane.jpg', 'airplane2.jpg', 'map.jpg', 'map2.jpg', 'map3.jpg', 'map4.jpg'] # populate with images, then use random to send an img to trip_details through /trip/ route
 YELP_API_KEY = os.environ['YELP_API_KEY']
 yelp_url = 'https://api.yelp.com/v3'
 
@@ -67,6 +67,7 @@ def create_user():
 @app.route('/create-trip', methods=['POST'])
 def create_trip():
     """ Create a new trip for the user. """
+    # create a class method that checks if a trip already exists?
     trip_name = request.form.get('trip-name')
     city = request.form.get('city')
     start_date = request.form.get('start')
@@ -76,13 +77,19 @@ def create_trip():
     # convert date strings to date
     start_date_converted = datetime.strptime(start_date, '%Y-%m-%d')
     end_date_converted = datetime.strptime(end_date, '%Y-%m-%d')
-    # create trip and add it to database
-    trip = Trip.create_trip(user_id, trip_name, city, start_date_converted, end_date_converted)
-    db.session.add(trip)
-    db.session.commit()
-    flash("Trip created!")
+    # create trip and add it to database, check if trip already exists - this is not working right now
+    user = User.get_by_id(user_id)
+    user_trips = user.trips
+    for trip in user_trips:
+        if trip_name == trip.trip_name:
+            flash("Trip already exists!")
+        else:
+            trip = Trip.create_trip(user_id, trip_name, city, start_date_converted, end_date_converted)
+            db.session.add(trip)
+            db.session.commit()
+            flash("Trip created!")
 
-    return redirect('/homepage')
+            return redirect('/homepage')
 
 @app.route('/homepage')
 def user_page():
@@ -90,8 +97,9 @@ def user_page():
     user_id = session['user_id']
     user = User.get_by_id(user_id)
     trips = user.trips
+    trip_image = choice(TRIP_IMAGES)
     
-    return render_template('homepage.html',trips=trips)
+    return render_template('homepage.html',trips=trips, trip_image=trip_image)
 
 @app.route('/trip/<trip_id>')
 def show_trip(trip_id):
@@ -99,22 +107,42 @@ def show_trip(trip_id):
 
     return render_template('trip_details.html',trip=trip)
 
-# @app.route('/api/activities')
-# def show_activities():
-#     # makes a call to yelp API to display activites in that city
-#     # I need to be able to pull which city it is referring to and pass it into the API call
-#     # trip = Trip.get_by_id() ??
-#     trip = request.args.get('seattle')
-#     url = 'https://api.yelp.com/v3/businesses/search'
-#     headers = {'Authorization': 'Bearer %s' % YELP_API_KEY}
-#     location = trip
-#     params = {'location': location, 'limit':10,'sort_by':'rating'}
+@app.route('/api/activities/<trip_id>')
+def show_activities(trip_id):
+    """ Makes a call to the Yelp Fusion API to display activities. """
+    # makes a call to yelp API to display activites in that city
+    # currently not working properly.. because state is not defined in the trip location for API call,
+    # user must specify City, State
+    trip = Trip.get_by_id(trip_id)
+    
+    url = 'https://api.yelp.com/v3/businesses/search'
+    headers = {'Authorization': 'Bearer %s' % YELP_API_KEY}
+    location = trip.city
+    # want to pass in categories (arts,active) for tourist sites, (restaurants,food) for restaurants
+    params = {'location': location, 'limit':10,'sort_by':'rating', 'categories':'arts,active'}
 
-#     res = requests.get(url,headers=headers,params=params)
-#     data = res.json()
+    res = requests.get(url,headers=headers,params=params)
+    data = res.json()
 
-#     # renders activity page
-#     return render_template('activities.html', data=data,trip=trip)
+    return render_template('activities.html', data=data, trip=trip)
+
+@app.route('/api/restaurants/<trip_id>')
+def show_restaurants(trip_id):
+    """ Makes a call to the Yelp Fusion API to display restaurants. """
+    # currently not working properly.. because state is not defined in the trip location for API call,
+    # user must specify City, State
+    trip = Trip.get_by_id(trip_id)
+    
+    url = 'https://api.yelp.com/v3/businesses/search'
+    headers = {'Authorization': 'Bearer %s' % YELP_API_KEY}
+    location = trip.city
+    params = {'location': location, 'limit':10,'sort_by':'rating', 'categories':'restaurants,food'}
+
+    res = requests.get(url,headers=headers,params=params)
+    data = res.json()
+
+    return render_template('restaurants.html', data=data, trip=trip)
+
 
 if __name__ == '__main__':
     connect_to_db(app)
