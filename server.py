@@ -147,11 +147,14 @@ def show_restaurants(trip_id):
 def create_activity(trip_id):
     """ Create an activity for a trip. """
     trip = Trip.get_by_id(trip_id)
-    yelp_id = request.form.get('yelp_id')
-    name = request.form.getlist('business')
+    names = request.form.getlist('business')
 
-    activity = Activity.create_activity(trip.trip_id, yelp_id, name)
-    db.session.add(activity)
+    # loop over business names returned from .getlist to create a single activity for each one
+    for name in names:
+        info = name.split(",")
+        activity = Activity.create_activity(trip.trip_id, info[1], info[0])
+        db.session.add(activity)
+
     db.session.commit()
     flash("Activities added!")
 
