@@ -10,6 +10,17 @@
     {% endblock %}
 </head>
 <body>
+    <section class="nav-bar">
+        <div class="title">Header Logo</div>
+    
+        <div class="nav-links">
+        <ul>
+            <li><a href="#">Header Link One</a></li>
+            <li><a href="#">Header Link Two</a></li>
+            <li><a href="#">Header Link Three</a></li>
+        </ul>
+        </div>
+        </section>
     {% block body %}
         {% for message in get_flashed_messages() %}
           <p>{{ message }}</p>
