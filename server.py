@@ -129,7 +129,6 @@ def show_activities(trip_id):
 @app.route('/api/restaurants/<trip_id>')
 def show_restaurants(trip_id):
     """ Makes a call to the Yelp Fusion API to display restaurants. """
-    # currently not working properly.. because state is not defined in the trip location for API call,
     # user must specify City, State
     trip = Trip.get_by_id(trip_id)
     
@@ -160,18 +159,30 @@ def create_activity(trip_id):
 
     return redirect(f'/trip/{trip_id}')
 
-@app.route('/map-coordinates')
-def marker_info():
+@app.route('/map-coordinates/<int:trip_id>')
+def marker_info(trip_id):
+    """ Get JSON data for map markers. """
+    trip = Trip.get_by_id(trip_id)
+
     activities = []
-    for activity in Activity.query.all():
+    for activity in trip.activities:
         activities.append({
             'name': activity.name,
             'lat': activity.latitude,
             'lng': activity.longitude
         })
     print(activities)
+    print(trip.activities)
     return jsonify(activities)
 
+@app.route('/logout')
+def logout():
+    session.pop('user_id', None)
+    return redirect('/')
+
+@app.route('/home')
+def redirect_homepage():
+    return redirect('/homepage')
 
 
 
