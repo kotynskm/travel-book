@@ -104,14 +104,14 @@ def user_page():
 @app.route('/trip/<trip_id>')
 def show_trip(trip_id):
     trip = Trip.get_by_id(trip_id)
+    MAPS_API_KEY = os.environ['MAPS_API_KEY']
 
-    return render_template('trip_details.html',trip=trip)
+    return render_template('trip_details.html',trip=trip, MAPS_API_KEY=MAPS_API_KEY)
 
 @app.route('/api/activities/<trip_id>')
 def show_activities(trip_id):
     """ Makes a call to the Yelp Fusion API to display activities. """
     # makes a call to yelp API to display activites in that city
-    # currently not working properly.. because state is not defined in the trip location for API call,
     # user must specify City, State
     trip = Trip.get_by_id(trip_id)
     
@@ -152,13 +152,27 @@ def create_activity(trip_id):
     # loop over business names returned from .getlist to create a single activity for each one
     for name in names:
         info = name.split(",")
-        activity = Activity.create_activity(trip.trip_id, info[1], info[0])
+        activity = Activity.create_activity(trip.trip_id, info[1], info[0], info[2], info[3])
         db.session.add(activity)
 
     db.session.commit()
     flash("Activities added!")
 
     return redirect(f'/trip/{trip_id}')
+
+@app.route('/map-coordinates')
+def marker_info():
+    activities = []
+    for activity in Activity.query.all():
+        activities.append({
+            'name': activity.name,
+            'lat': activity.latitude,
+            'lng': activity.longitude
+        })
+    print(activities)
+    return jsonify(activities)
+
+
 
 
 
