@@ -22,7 +22,7 @@
                 {% for trip in trips %}
                 <div class="trip">
                   <li><a href="/trip/{{ trip.trip_id }}">{{ trip.city }}</a></li>
-                  <img src="../static/img/{{trip_image}}">
+                  <img src="../static/img/{{trip.trip_image}}">
                 </div>
                 {% endfor %}
             </ul>

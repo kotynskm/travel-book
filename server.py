@@ -73,6 +73,7 @@ def create_trip():
     start_date = request.form.get('start')
     end_date = request.form.get('end')
     user_id = session['user_id']
+    trip_image = choice(TRIP_IMAGES)
 
     # convert date strings to date
     start_date_converted = datetime.strptime(start_date, '%Y-%m-%d')
@@ -84,7 +85,7 @@ def create_trip():
     #     if trip_name == trip.trip_name:
     #         flash("Trip already exists!")
     #     else:
-    trip = Trip.create_trip(user_id, trip_name, city, start_date_converted, end_date_converted)
+    trip = Trip.create_trip(user_id, trip_name, city, start_date_converted, end_date_converted, trip_image)
     db.session.add(trip)
     db.session.commit()
     flash("Trip created!")
@@ -97,9 +98,9 @@ def user_page():
     user_id = session['user_id']
     user = User.get_by_id(user_id)
     trips = user.trips
-    trip_image = choice(TRIP_IMAGES)
+    # trip_image = choice(TRIP_IMAGES)
     
-    return render_template('homepage.html',trips=trips, trip_image=trip_image)
+    return render_template('homepage.html',trips=trips)
 
 @app.route('/trip/<trip_id>')
 def show_trip(trip_id):
