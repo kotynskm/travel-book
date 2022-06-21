@@ -151,7 +151,7 @@ def create_activity(trip_id):
     # loop over business names returned from .getlist to create a single activity for each one
     for name in names:
         info = name.split(",")
-        activity = Activity.create_activity(trip.trip_id, info[1], info[0], info[2], info[3])
+        activity = Activity.create_activity(trip.trip_id, info[1], info[0], info[2], info[3], info[4], info[5], info[6])
         db.session.add(activity)
 
     db.session.commit()
@@ -169,7 +169,10 @@ def marker_info(trip_id):
         activities.append({
             'name': activity.name,
             'lat': activity.latitude,
-            'lng': activity.longitude
+            'lng': activity.longitude,
+            'phone': activity.phone,
+            'address': activity.address,
+            'zipcode': activity.zipcode
         })
     print(activities)
     print(trip.activities)

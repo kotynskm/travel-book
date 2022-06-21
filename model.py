@@ -78,16 +78,20 @@ class Activity(db.Model):
     name = db.Column(db.String(100))
     latitude = db.Column(db.Float)
     longitude = db.Column(db.Float)
+    phone = db.Column(db.String(20))
+    address = db.Column(db.String(100))
+    zipcode = db.Column(db.String(50))
 
     @classmethod
-    def create_activity(cls, trip_id, yelp_id, name, latitude, longitude):
+    def create_activity(cls, trip_id, yelp_id, name, latitude, longitude, phone, address, zipcode):
         """ Create an activity. """
-        return cls(trip_id=trip_id, yelp_id=yelp_id, name=name, latitude=latitude, longitude=longitude)
+        return cls(trip_id=trip_id, yelp_id=yelp_id, name=name, latitude=latitude, longitude=longitude, phone=phone, address=address,
+        zipcode=zipcode)
     
     trip = db.relationship('Trip', back_populates='activities')
 
     def __repr__(self):
-        return f'<Activity {self.activity_id} Trip ID {self.trip_id} Yelp ID {self.yelp_id} Name {self.name} Lat {self.latitude} Long {self.longitude}'
+        return f'<Activity {self.activity_id} Trip ID {self.trip_id} Yelp ID {self.yelp_id} Name {self.name} Lat {self.latitude} Long {self.longitude} Phone {self.phone} Address {self.address} Zip {self.zipcode}'
 
 
 def connect_to_db(flask_app, db_uri="postgresql:///travel_book", echo=True):
