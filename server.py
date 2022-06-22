@@ -6,6 +6,7 @@ from pprint import pprint as pp
 from model import User, Trip, Activity, connect_to_db, db
 from datetime import datetime
 from random import choice
+import json
 
 TRIP_IMAGES = ['airplane.jpg', 'airplane2.jpg', 'map.jpg', 'map2.jpg', 'map3.jpg', 'map4.jpg', 'airport.jpg', 'man_airport.jpg', 'globe.jpg'] # populate with images, then use random to send an img to trip_details through /trip/ route
 YELP_API_KEY = os.environ['YELP_API_KEY']
@@ -150,25 +151,40 @@ def show_restaurants(trip_id):
 def get_flights(trip_id):
     trip = Trip.get_by_id(trip_id)
     url = 'http://api.aviationstack.com/v1/flights'
-    iata_code = IATA_DICT[trip.city]
-    params = {'access_key': AVI_API_KEY, 'limit': 10, 'arr_iata': iata_code}
-    # TODO
+    # iata_code = IATA_DICT[trip.city]
+    depart_city = trip.depart_city
+    print(depart_city)
+    arrival_city = trip.city
+
+    depart_iata = get_airport_code(depart_city)
+    print(depart_iata)
+    print(type(depart_iata))
+    arrival_iata = get_airport_code(arrival_city)
+    print(arrival_iata)
+
+    params = {'access_key': AVI_API_KEY, 'limit': 10, 'dep_iata': depart_iata, 'arr_iata': arrival_iata}
     # if get airport returns none have some kind of error
     res = requests.get(url, params=params)
     data = res.json()
 
     return render_template('flights.html', data=data, trip=trip)
 
-# def get_airport_code(trip.city):
-    # use this helper func to get the starter city IATA and end city IATA
-#     # iata_code = None
-#     # open the file
-#     for obj in data 
-#     # city_name = trip.city.split(',')[0]
-#     # if obj['city'] == city_name:
-#     # iata_code = obj['code']
-#     # return iata_code
+def get_airport_code(city):
+    """ Helper func to get the starter city IATA and end city IATA codes. """
+    iata_code = None
+    # from City, ST grab the city using split and index
+    city_name = city.split(',')[0]
+    # open the file and store in a variable so we can view it's contents
+    airport_file = open('airport_data.json')
+    # use json.load to convert json string file into python dictionary
+    json_airport_file = json.load(airport_file)
+    # loop over each obj in data file
+    for obj in json_airport_file:
+        if obj['city'] == city_name:
+            iata_code = obj['code']
 
+    airport_file.close()
+    return iata_code
 
 
 @app.route('/create-activity/<trip_id>', methods=['POST'])
