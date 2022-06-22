@@ -9,7 +9,9 @@
         {% for business in data.businesses %}
         <div class="business">
           <h3>{{business.name}} {{business.rating}}</h3>
-          <img src="{{business.image_url}}">
+          <div class="image">
+            <img src="{{business.image_url}}" width="500px" height="500px">
+            </div>
           <input type="checkbox" name="business" value="{{business.name}},{{business.id}},
             {{business.coordinates.latitude}},{{business.coordinates.longitude}},{{business.phone}},{{business.location.address1}},
             {{business.location.zip_code}}">

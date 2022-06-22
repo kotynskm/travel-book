@@ -102,7 +102,7 @@ def user_page():
     user = User.get_by_id(user_id)
     trips = user.trips
    
-    return render_template('homepage.html',trips=trips)
+    return render_template('homepage.html',trips=trips, user=user)
 
 @app.route('/trip/<trip_id>')
 def show_trip(trip_id):

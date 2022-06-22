@@ -59,6 +59,15 @@ body, html {
     height: 400px;
     width: 400px;
   }
+  .image {
+    height: 300px;
+    width: 300px;
+  }
+
+  .icon {
+    display: flex;
+    justify-content: center;
+  }
 
   /* h3 {
     text-align: center;
