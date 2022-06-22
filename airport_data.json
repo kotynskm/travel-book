@@ -77122,6 +77122,12 @@
       "carriers": "1"
     },
     {
+      "code": "BOS",
+      "city": "Boston",
+      "state": "Massachusetts",
+      "country": "United States"
+    },
+    {
       "code": "ZUA",
       "lat": "43.0958",
       "lon": "-75.2428",

@@ -11,7 +11,6 @@ import json
 TRIP_IMAGES = ['airplane.jpg', 'airplane2.jpg', 'map.jpg', 'map2.jpg', 'map3.jpg', 'map4.jpg', 'airport.jpg', 'man_airport.jpg', 'globe.jpg'] # populate with images, then use random to send an img to trip_details through /trip/ route
 YELP_API_KEY = os.environ['YELP_API_KEY']
 AVI_API_KEY = os.environ['AVI_API_KEY']
-IATA_DICT = {'Seattle, WA': 'SEA', 'New York, NY': 'JFK'}
 
 app = Flask(__name__)
 app.secret_key = 'SECRET_KEY'
@@ -102,8 +101,7 @@ def user_page():
     user_id = session['user_id']
     user = User.get_by_id(user_id)
     trips = user.trips
-    # trip_image = choice(TRIP_IMAGES)
-    
+   
     return render_template('homepage.html',trips=trips)
 
 @app.route('/trip/<trip_id>')
@@ -151,21 +149,19 @@ def show_restaurants(trip_id):
 def get_flights(trip_id):
     trip = Trip.get_by_id(trip_id)
     url = 'http://api.aviationstack.com/v1/flights'
-    # iata_code = IATA_DICT[trip.city]
+    # Get the depart city, arrival city
     depart_city = trip.depart_city
-    print(depart_city)
     arrival_city = trip.city
-
+    # Get the airport IATA code for depart and arrival city
     depart_iata = get_airport_code(depart_city)
-    print(depart_iata)
-    print(type(depart_iata))
     arrival_iata = get_airport_code(arrival_city)
-    print(arrival_iata)
+
 
     params = {'access_key': AVI_API_KEY, 'limit': 10, 'dep_iata': depart_iata, 'arr_iata': arrival_iata}
     # if get airport returns none have some kind of error
     res = requests.get(url, params=params)
     data = res.json()
+    print(data)
 
     return render_template('flights.html', data=data, trip=trip)
 

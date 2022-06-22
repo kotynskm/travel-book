@@ -1,13 +1,21 @@
 {% extends 'base.html' %}
 {% block body %}
 
-<h1> Flight One </h1>
+<h1> Flights </h1>
 {% for flight in data.data %}
+<div class="flights">
 <ul>
-<h3>Airline Name: {{ flight['airline']['name'] }}</h3>
-<h3>Scheduled Depart: {{ flight['departure']['airport'] }}</h3>
-<h3>Scheduled Arrival: {{ flight['arrival']['airport'] }}</h3>
+    <li><h3>Airline Name: {{ flight['airline']['name'] }}</h3>
+        <h3>Scheduled Depart: {{ flight['departure']['airport'] }}</h3>
+        <h3>Depart Gate: {{ flight['departure']['gate'] }}</h3>
+        <h3>Depart Terminal: {{ flight['departure']['terminal'] }}</h3>
+        <h3>Scheduled Arrival: {{ flight['arrival']['airport'] }}</h3>
+        <h3>Arrival Gate: {{ flight['arrival']['gate'] }}</h3>
+        <h3>Arrival Terminal: {{ flight['arrival']['terminal'] }}</h3>
+
+    </li>
 </ul>
+</div>
 {% endfor %}
 
 

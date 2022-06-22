@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
 {% block body %}
     <div class="container">
-        <div class="create-trip">
+        <div class="row justify-content-center">
+            <div class="col">
             <h3>Create a new trip</h3>
             <form action="/create-trip" method="POST">
             <label for="city">Choose a Destination City: City, State</label><br>
@@ -17,22 +18,20 @@
             <button class="create-trip" type="submit">Submit</button>
         </form>
         </div>
-
-        <div class="trip-loop">
+   
+        <div class="col">
             <h3>Current trips planned</h3>
             <ul>
                 {% for trip in trips %}
                 <div class="trip">
-                  <li><a href="/trip/{{ trip.trip_id }}">{{ trip.city }}</a></li>
+                  <li><a href="/trip/{{ trip.trip_id }}">{{ trip.trip_name }} in {{ trip.city }}</a></li>
                   <img src="../static/img/{{trip.trip_image}}">
                 </div>
                 {% endfor %}
             </ul>
-
             </form>
+            </div>
         </div>
-
-
-        </div>
+    </div>
     
 {% endblock %}
