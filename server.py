@@ -1,3 +1,4 @@
+from asyncore import file_dispatcher
 from flask import Flask, render_template, request, session, redirect, jsonify, flash
 import requests
 import os
@@ -6,9 +7,10 @@ from model import User, Trip, Activity, connect_to_db, db
 from datetime import datetime
 from random import choice
 
-TRIP_IMAGES = ['airplane.jpg', 'airplane2.jpg', 'map.jpg', 'map2.jpg', 'map3.jpg', 'map4.jpg'] # populate with images, then use random to send an img to trip_details through /trip/ route
+TRIP_IMAGES = ['airplane.jpg', 'airplane2.jpg', 'map.jpg', 'map2.jpg', 'map3.jpg', 'map4.jpg', 'airport.jpg', 'man_airport.jpg', 'globe.jpg'] # populate with images, then use random to send an img to trip_details through /trip/ route
 YELP_API_KEY = os.environ['YELP_API_KEY']
-yelp_url = 'https://api.yelp.com/v3'
+AVI_API_KEY = os.environ['AVI_API_KEY']
+IATA_DICT = {'Seattle, WA': 'SEA', 'New York, NY': 'JFK'}
 
 app = Flask(__name__)
 app.secret_key = 'SECRET_KEY'
@@ -70,6 +72,7 @@ def create_trip():
     # create a class method that checks if a trip already exists?
     trip_name = request.form.get('trip-name')
     city = request.form.get('city')
+    depart_city = request.form.get('depart_city')
     start_date = request.form.get('start')
     end_date = request.form.get('end')
     user_id = session['user_id']
@@ -85,7 +88,7 @@ def create_trip():
     #     if trip_name == trip.trip_name:
     #         flash("Trip already exists!")
     #     else:
-    trip = Trip.create_trip(user_id, trip_name, city, start_date_converted, end_date_converted, trip_image)
+    trip = Trip.create_trip(user_id, trip_name, city, start_date_converted, end_date_converted, trip_image, depart_city)
     db.session.add(trip)
     db.session.commit()
     flash("Trip created!")
@@ -142,6 +145,31 @@ def show_restaurants(trip_id):
     data = res.json()
 
     return render_template('restaurants.html', data=data, trip=trip)
+
+@app.route('/api/flights/<trip_id>')
+def get_flights(trip_id):
+    trip = Trip.get_by_id(trip_id)
+    url = 'http://api.aviationstack.com/v1/flights'
+    iata_code = IATA_DICT[trip.city]
+    params = {'access_key': AVI_API_KEY, 'limit': 10, 'arr_iata': iata_code}
+    # TODO
+    # if get airport returns none have some kind of error
+    res = requests.get(url, params=params)
+    data = res.json()
+
+    return render_template('flights.html', data=data, trip=trip)
+
+# def get_airport_code(trip.city):
+    # use this helper func to get the starter city IATA and end city IATA
+#     # iata_code = None
+#     # open the file
+#     for obj in data 
+#     # city_name = trip.city.split(',')[0]
+#     # if obj['city'] == city_name:
+#     # iata_code = obj['code']
+#     # return iata_code
+
+
 
 @app.route('/create-activity/<trip_id>', methods=['POST'])
 def create_activity(trip_id):

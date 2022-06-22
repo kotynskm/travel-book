@@ -3,6 +3,8 @@ from unicodedata import name
 from flask_sqlalchemy import SQLAlchemy
 from datetime import date
 
+from sqlalchemy import nullslast
+
 db = SQLAlchemy()
 
 class User(db.Model):
@@ -49,6 +51,7 @@ class Trip(db.Model):
     start_date = db.Column(db.Date, nullable=False)
     end_date = db.Column(db.Date, nullable=False)
     trip_image = db.Column(db.String(40))
+    depart_city = db.Column(db.String(40), nullable=False)
 
     user = db.relationship('User', back_populates='trips')
     activities = db.relationship('Activity', back_populates='trip')
@@ -57,9 +60,9 @@ class Trip(db.Model):
         return f'<Trip {self.trip_id} Name {self.trip_name} City {self.city}>'
 
     @classmethod
-    def create_trip(cls, user_id, trip_name, city, start_date, end_date, trip_image):
+    def create_trip(cls, user_id, trip_name, city, start_date, end_date, trip_image, depart_city):
         """ Create a trip. """
-        return cls(user_id=user_id, trip_name=trip_name, city=city, start_date=start_date, end_date=end_date, trip_image=trip_image)
+        return cls(user_id=user_id, trip_name=trip_name, city=city, start_date=start_date, end_date=end_date, trip_image=trip_image, depart_city=depart_city)
 
     @classmethod
     def get_by_id(cls, trip_id):
