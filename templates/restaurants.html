@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<h1>Restaurants in {{trip.city}}</h1>
+
+<div class="businesses-loop">
+      
+      <form action="/create-activity/{{trip.trip_id}}", method="POST"> 
+        {% for business in data.businesses %}
+        <div class="business">
+          <h3>{{business.name}} {{business.rating}}</h3>
+          <img src="{{business.image_url}}">
+          <input type="checkbox" name="business" value="{{business.name}},{{business.id}},
+            {{business.coordinates.latitude}},{{business.coordinates.longitude}},{{business.phone}},{{business.location.address1}},
+            {{business.location.zip_code}}">
+        </div>
+        {% endfor %}   
+        <button type="submit">Submit</button>
+      </form>
+      
+</div>
+
+
+
+
+
+
+{% endblock %}

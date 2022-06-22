@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<h1> Flight One </h1>
+{% for flight in data.data %}
+<ul>
+<h3>Airline Name: {{ flight['airline']['name'] }}</h3>
+<h3>Scheduled Depart: {{ flight['departure']['airport'] }}</h3>
+<h3>Scheduled Arrival: {{ flight['arrival']['airport'] }}</h3>
+</ul>
+{% endfor %}
+
+
+
+
+
+{% endblock %}
