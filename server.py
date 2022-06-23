@@ -4,7 +4,7 @@ import requests
 import os
 from pprint import pprint as pp
 from model import User, Trip, Activity, connect_to_db, db
-from datetime import datetime
+from datetime import datetime, timedelta
 from random import choice
 import json
 
@@ -221,7 +221,20 @@ def marker_info(trip_id):
 def view_calendar(trip_id):
     """ View calendar of events for trip. """
     trip = Trip.get_by_id(trip_id)
-    return render_template('calendar.html', trip=trip)
+    activities = trip.activities
+
+    days = calculate_days(trip)
+    return render_template('calendar.html', trip=trip, activities=activities, days=days)
+
+def calculate_days(trip):
+    days = []
+    trip_start = trip.start_date
+    trip_end = trip.end_date
+    delta = trip_end - trip_start
+    for i in range(delta.days + 1):
+        day = trip_start + timedelta(days=i)
+        days.append(day)
+    return days
 
 @app.route('/logout')
 def logout():
