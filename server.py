@@ -215,9 +215,13 @@ def marker_info(trip_id):
             'address': activity.address,
             'zipcode': activity.zipcode
         })
-    print(activities)
-    print(trip.activities)
     return jsonify(activities)
+
+@app.route('/calendar/<trip_id>')
+def view_calendar(trip_id):
+    """ View calendar of events for trip. """
+    trip = Trip.get_by_id(trip_id)
+    return render_template('calendar.html', trip=trip)
 
 @app.route('/logout')
 def logout():

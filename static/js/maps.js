@@ -6,7 +6,10 @@ function initMap() {
       zoom: 10,
       center: sf,
     });
-
+    const infoWindow = new google.maps.InfoWindow({
+     
+      maxWidth: 200,
+    })
     // fetch request to map marker route to create markers for map
     fetch(`/map-coordinates/${window.location.href.split("/")[4]}`)
     .then((response) => response.json())
@@ -23,10 +26,10 @@ function initMap() {
       // create an info window for each map marker
         const markerInfo = `<h3>${marker.name}</h3><h4>${marker.address}${marker.zipcode}</h4><h4>${marker.phone}`;
     
-        const infoWindow = new google.maps.InfoWindow({
-          content: markerInfo,
-          maxWidth: 200,
-        });
+        // const infoWindow = new google.maps.InfoWindow({
+        //   content: markerInfo,
+        //   maxWidth: 200,
+        // });
     
         mapMarker.addListener('click', () => {
           infoWindow.close();
