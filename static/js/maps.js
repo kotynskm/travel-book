@@ -24,7 +24,7 @@ function initMap() {
           map: map,
         });
       // create an info window for each map marker
-        const markerInfo = `<h3>${marker.name}</h3><h4>${marker.address}${marker.zipcode}</h4><h4>${marker.phone}`;
+        const markerInfo = `<h4>${marker.name}</h4><h5>${marker.address}${marker.zipcode}</h5><h5>${marker.phone}</h5>`;
     
         // const infoWindow = new google.maps.InfoWindow({
         //   content: markerInfo,

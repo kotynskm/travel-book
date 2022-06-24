@@ -251,23 +251,19 @@ def update_calendar(trip_id):
 def calendar_info(trip_id):
     """ Get JSON data for calendar. """
     trip = Trip.get_by_id(trip_id)
-    data = []
+    activities = []
     for activity in trip.activities:
         if activity.date:
-            data.append({
+            activities.append({
                 'title': activity.name,
                 'start': activity.date.strftime("%Y-%m-%d")
             })
+    data = {
+        'trip_start': trip.start_date.strftime("%Y-%m-%d"),
+        'activities': activities
+    }
     return jsonify(data)
 
-
-
-
-    
-#route to get JSON data for activity date and title
-# get all activities and pass into js file
-# fetch request
-# return jsonify data
 
 @app.route('/logout')
 def logout():
