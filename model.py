@@ -85,12 +85,18 @@ class Activity(db.Model):
     phone = db.Column(db.String(20))
     address = db.Column(db.String(100))
     zipcode = db.Column(db.String(50))
+    date = db.Column(db.Date)
 
     @classmethod
     def create_activity(cls, trip_id, yelp_id, name, latitude, longitude, phone, address, zipcode):
         """ Create an activity. """
         return cls(trip_id=trip_id, yelp_id=yelp_id, name=name, latitude=latitude, longitude=longitude, phone=phone, address=address,
         zipcode=zipcode)
+
+    @classmethod
+    def get_by_id(cls, activity_id):
+        """ Get activity by ID. """
+        return cls.query.get(activity_id)
     
     trip = db.relationship('Trip', back_populates='activities')
 

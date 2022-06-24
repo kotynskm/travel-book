@@ -236,6 +236,39 @@ def calculate_days(trip):
         days.append(day)
     return days
 
+@app.route('/update_calendar/<trip_id>', methods=['POST'])
+def update_calendar(trip_id):
+    """ Add event to the calendar. """
+    activity_id = request.form.get('activity')
+    date = request.form.get('day')
+    current_activity = Activity.get_by_id(activity_id)
+    current_activity.date = date
+    db.session.commit()
+   
+    return redirect(f'/calendar/{trip_id}')
+
+@app.route('/send_calendar_data/<int:trip_id>')
+def calendar_info(trip_id):
+    """ Get JSON data for calendar. """
+    trip = Trip.get_by_id(trip_id)
+    data = []
+    for activity in trip.activities:
+        if activity.date:
+            data.append({
+                'title': activity.name,
+                'start': activity.date.strftime("%Y-%m-%d")
+            })
+    return jsonify(data)
+
+
+
+
+    
+#route to get JSON data for activity date and title
+# get all activities and pass into js file
+# fetch request
+# return jsonify data
+
 @app.route('/logout')
 def logout():
     session.pop('user_id', None)
