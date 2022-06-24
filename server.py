@@ -161,7 +161,6 @@ def get_flights(trip_id):
     # if get airport returns none have some kind of error
     res = requests.get(url, params=params)
     data = res.json()
-    print(data)
 
     return render_template('flights.html', data=data, trip=trip)
 

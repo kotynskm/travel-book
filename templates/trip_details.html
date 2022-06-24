@@ -20,13 +20,47 @@
 <a href="/api/flights/{{ trip.trip_id }}">Check flights for your trip!</a><br>
 </div>
 
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Add a note
+  </button>
+
 <div class="current_activities">
 <h1>Current Activities</h1>
 <ul>
     {% for activity in trip.activities %}
-    <li>{{activity.name}}</li>
+    {% if activity.date == None %}
+    <li>{{activity.name}}: No date selected yet.</li>
+    {% else %}
+    <li>{{activity.name}}: Scheduled on {{activity.date}}</li>
+    {% endif %}
     {% endfor %}
 </ul>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Trip Notes</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+                <label for="activity-note">Add Note</label>
+                <input type="text" class="activity-note" id="activity-note" placeholder="Your note here!">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 <div class="calendar-block">
 <h1>View Your Calendar</h1>
@@ -40,7 +74,8 @@
 <script async
     src="https://maps.googleapis.com/maps/api/js?key={{MAPS_API_KEY}}&callback=initMap">
 </script>
-
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 
 
 {% endblock %}
