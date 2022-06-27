@@ -39,6 +39,11 @@
 
 <div class="current_notes">
 <h1>My Notes</h1>
+<ul>
+  {% for note in trip.notes %}
+  <li>{{note.note}}</li>
+  {% endfor %}
+</ul>
 
 
 </div>
@@ -52,17 +57,18 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="/submit_note/{{ trip.trip_id }}", method="POST">
+          <form action="/submit_note/{{trip.trip_id}}" method="POST">
             <div class="form-group">
                 <label for="activity-note">Add Note</label>
-                <input type="text" class="activity-note" id="activity-note" placeholder="Your note here!">
+                <input type="text" class="activity-note" name="activity-note" placeholder="Your note here!">
             </div>
+          
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
         </div>
+      </form>
       </div>
     </div>
   </div>

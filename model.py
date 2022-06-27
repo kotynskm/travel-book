@@ -115,18 +115,24 @@ class Note(db.Model):
     trip_id = db.Column(db.Integer, db.ForeignKey('trips.trip_id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
 
+    trip = db.relationship('Trip', backref='notes')
+    user = db.relationship('User', backref='notes')
+
+    def __repr__(self):
+        return f'<Note: {self.note} User: {self.user_id} Trip: {self.trip_id}'
+
+
     @classmethod
     def create_note(cls, note, trip_id, user_id):
         """ Create a note. """
         return cls(note=note, trip_id=trip_id, user_id=user_id)
 
-    trip = db.relationship('Trip', backref='notes')
-    user = db.relationship('User', backref='notes')
+    
 
 
 
 
-def connect_to_db(flask_app, db_uri="postgresql:///travel_book", echo=True):
+def connect_to_db(flask_app, db_uri="postgresql:///travel_book", echo=False):
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
     flask_app.config["SQLALCHEMY_ECHO"] = echo
     flask_app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False

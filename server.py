@@ -275,7 +275,7 @@ def add_note(trip_id):
     trip_note = Note.create_note(note, trip_id, user_id)
     db.session.add(trip_note)
     db.session.commit()
-    
+
     return redirect(f'/trip/{trip_id}')
 
 
