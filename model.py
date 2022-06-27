@@ -19,6 +19,7 @@ class User(db.Model):
     password = db.Column(db.String(40), nullable=False)
 
     trips = db.relationship('Trip', back_populates='user')
+    # user = db.relationship('User', backref='notes')
 
     def __repr__(self):
         return f'<User {self.fname} password {self.password} email {self.email} lastname {self.lname}>'
@@ -55,6 +56,7 @@ class Trip(db.Model):
 
     user = db.relationship('User', back_populates='trips')
     activities = db.relationship('Activity', back_populates='trip')
+    # trip = db.relationship('Trip', backref='notes')
 
     def __repr__(self):
         return f'<Trip {self.trip_id} Name {self.trip_name} City {self.city}>'
@@ -102,6 +104,26 @@ class Activity(db.Model):
 
     def __repr__(self):
         return f'<Activity {self.activity_id} Trip ID {self.trip_id} Yelp ID {self.yelp_id} Name {self.name} Lat {self.latitude} Long {self.longitude} Phone {self.phone} Address {self.address} Zip {self.zipcode}'
+
+class Note(db.Model):
+    """ Data model for a note. """
+
+    __tablename__ = 'notes'
+
+    note_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    note = db.Column(db.String(150))
+    trip_id = db.Column(db.Integer, db.ForeignKey('trips.trip_id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+
+    @classmethod
+    def create_note(cls, note, trip_id, user_id):
+        """ Create a note. """
+        return cls(note=note, trip_id=trip_id, user_id=user_id)
+
+    trip = db.relationship('Trip', backref='notes')
+    user = db.relationship('User', backref='notes')
+
+
 
 
 def connect_to_db(flask_app, db_uri="postgresql:///travel_book", echo=True):

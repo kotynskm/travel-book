@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, session, redirect, jsonify, f
 import requests
 import os
 from pprint import pprint as pp
-from model import User, Trip, Activity, connect_to_db, db
+from model import User, Trip, Activity, Note, connect_to_db, db
 from datetime import datetime, timedelta
 from random import choice
 import json
@@ -262,6 +262,21 @@ def calendar_info(trip_id):
         'activities': activities
     }
     return jsonify(data)
+
+@app.route('/submit_note/<trip_id>', methods=['POST'])
+def add_note(trip_id):
+    """ Add a note to the trip. """
+    trip = Trip.get_by_id(trip_id)
+    trip_id = trip.trip_id
+    user = trip.user
+    user_id = user.user_id
+    note = request.form.get('activity-note')
+
+    trip_note = Note.create_note(note, trip_id, user_id)
+    db.session.add(trip_note)
+    db.session.commit()
+    
+    return redirect(f'/trip/{trip_id}')
 
 
 @app.route('/logout')

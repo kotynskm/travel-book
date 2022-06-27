@@ -37,6 +37,12 @@
     {% endfor %}
 </ul>
 
+<div class="current_notes">
+<h1>My Notes</h1>
+
+
+</div>
+
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -46,16 +52,16 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form>
+          <form action="/submit_note/{{ trip.trip_id }}", method="POST">
             <div class="form-group">
                 <label for="activity-note">Add Note</label>
                 <input type="text" class="activity-note" id="activity-note" placeholder="Your note here!">
             </div>
-          </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
         </div>
       </div>
     </div>
