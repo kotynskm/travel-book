@@ -8,6 +8,7 @@ from datetime import datetime, timedelta
 from random import choice
 import json
 import cloudinary.uploader
+from passlib.hash import argon2
 
 TRIP_IMAGES = ['airplane.jpg', 'airplane2.jpg', 'map.jpg', 'map2.jpg', 'map3.jpg', 'map4.jpg', 'airport.jpg', 'man_airport.jpg', 'globe.jpg'] # populate with images, then use random to send an img to trip_details through /trip/ route
 YELP_API_KEY = os.environ['YELP_API_KEY']
@@ -34,16 +35,17 @@ def get_login_info():
     password = request.form.get('password')
 
     user = User.get_by_email(email)
-    
-    if not user or user.password != password:
-        flash("The email or password you entered was incorrect.")
-        return redirect('/')
-    else:
-        # Log in user by storing the user's id in session
+    hashed = user.password
+
+    if argon2.verify(password, hashed):
         session['user_id'] = user.user_id
         flash(f'Welcome back, {user.fname}!')
+    else:
+        flash("The email or password you entered was incorrect.")
+        return redirect('/')
 
     return redirect('/homepage')
+    
 
 @app.route('/register')
 def show_registration_page():
@@ -56,6 +58,7 @@ def create_user():
     """ Create a new user. """
     email = request.form.get('email')
     password = request.form.get('password')
+    hashed = argon2.hash(password)
     fname = request.form.get('fname')
     lname = request.form.get('lname')
 
@@ -63,7 +66,7 @@ def create_user():
     if user:
         flash("This email is already in use, please try again.")
     else:
-        user = User.create_user(fname, lname, email, password)
+        user = User.create_user(fname, lname, email, hashed)
         db.session.add(user)
         db.session.commit()
         flash("Account creation successful! Please login.")

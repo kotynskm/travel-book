@@ -16,7 +16,7 @@ class User(db.Model):
     fname = db.Column(db.String(40), nullable=False)
     lname = db.Column(db.String(40), nullable=False)
     email = db.Column(db.String(40), nullable=False, unique=True)
-    password = db.Column(db.String(40), nullable=False)
+    password = db.Column(db.String(150), nullable=False)
 
     # relationship to trips and notes
     trips = db.relationship('Trip', back_populates='user')
