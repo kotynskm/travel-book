@@ -281,11 +281,21 @@ def add_note(trip_id):
 @app.route('/delete_note/<trip_id>', methods=['POST'])
 def delete_note(trip_id):
     """ Delete a note from trip. """
-    trip =Trip.get_by_id(trip_id)
     note_id = request.form.get('note-id')
 
     note = Note.get_by_id(note_id)
     db.session.delete(note)
+    db.session.commit()
+
+    return redirect(f'/trip/{trip_id}')
+
+@app.route('/delete_activity/<trip_id>', methods=['POST'])
+def delete_activity(trip_id):
+    """ Delete activity from trip. """
+    activity_id = request.form.get('activity-id')
+
+    activity = Activity.get_by_id(activity_id)
+    db.session.delete(activity)
     db.session.commit()
 
     return redirect(f'/trip/{trip_id}')

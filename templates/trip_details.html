@@ -23,15 +23,17 @@
 
 <div class="current_activities">
 <h1>Current Activities</h1>
+<form action="/delete_activity/{{ trip.trip_id }}" method="POST">
 <ul>
     {% for activity in trip.activities %}
     {% if activity.date == None %}
-    <li>{{activity.name}}: No date selected yet.</li>
+    <li>{{activity.name}}: No date selected yet.<button type="submit" name="activity-id" value="{{activity.activity_id}}">Delete</li>
     {% else %}
-    <li>{{activity.name}}: Scheduled on {{activity.date}}</li>
+    <li>{{activity.name}}: Scheduled on {{activity.date}}<button type="submit" name="activity-id" value="{{activity.activity_id}}">Delete</li>
     {% endif %}
     {% endfor %}
 </ul>
+</form>
 
 <div class="current_notes">
 <h1>My Notes</h1>
