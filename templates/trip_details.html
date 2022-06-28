@@ -20,10 +20,6 @@
 <a href="/api/flights/{{ trip.trip_id }}">Check flights for your trip!</a><br>
 </div>
 
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Add a note
-  </button>
 
 <div class="current_activities">
 <h1>Current Activities</h1>
@@ -39,11 +35,18 @@
 
 <div class="current_notes">
 <h1>My Notes</h1>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Add a note
+</button>
+
+<form action="/delete_note/{{ trip.trip_id }}" method="POST">
 <ul>
   {% for note in trip.notes %}
-  <li>{{note.note}}</li>
+  <li>{{note.note}}<button type="submit" name="note-id" value="{{note.note_id}}">Delete</li>
   {% endfor %}
 </ul>
+</form>
 
 
 </div>

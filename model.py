@@ -127,6 +127,10 @@ class Note(db.Model):
         """ Create a note. """
         return cls(note=note, trip_id=trip_id, user_id=user_id)
 
+    @classmethod
+    def get_by_id(cls, note_id):
+        """ Get note by ID. """
+        return cls.query.get(note_id)
     
 
 
