@@ -18,6 +18,7 @@ class User(db.Model):
     email = db.Column(db.String(40), nullable=False, unique=True)
     password = db.Column(db.String(40), nullable=False)
 
+    # relationship to trips and notes
     trips = db.relationship('Trip', back_populates='user')
     # user = db.relationship('User', backref='notes')
 
@@ -54,6 +55,7 @@ class Trip(db.Model):
     trip_image = db.Column(db.String(40))
     depart_city = db.Column(db.String(40), nullable=False)
 
+    # relationships to user, activities, and notes
     user = db.relationship('User', back_populates='trips')
     activities = db.relationship('Activity', back_populates='trip')
     # trip = db.relationship('Trip', backref='notes')
@@ -72,7 +74,6 @@ class Trip(db.Model):
         return cls.query.get(trip_id)
 
     
-
 class Activity(db.Model):
     """ Data model for an activity. """
 
@@ -89,6 +90,12 @@ class Activity(db.Model):
     zipcode = db.Column(db.String(50))
     date = db.Column(db.Date)
 
+    # relationship to trip
+    trip = db.relationship('Trip', back_populates='activities')
+
+    def __repr__(self):
+        return f'<Activity {self.activity_id} Trip ID {self.trip_id} Yelp ID {self.yelp_id} Name {self.name} Lat {self.latitude} Long {self.longitude} Phone {self.phone} Address {self.address} Zip {self.zipcode}'
+
     @classmethod
     def create_activity(cls, trip_id, yelp_id, name, latitude, longitude, phone, address, zipcode):
         """ Create an activity. """
@@ -100,10 +107,6 @@ class Activity(db.Model):
         """ Get activity by ID. """
         return cls.query.get(activity_id)
     
-    trip = db.relationship('Trip', back_populates='activities')
-
-    def __repr__(self):
-        return f'<Activity {self.activity_id} Trip ID {self.trip_id} Yelp ID {self.yelp_id} Name {self.name} Lat {self.latitude} Long {self.longitude} Phone {self.phone} Address {self.address} Zip {self.zipcode}'
 
 class Note(db.Model):
     """ Data model for a note. """
@@ -115,6 +118,7 @@ class Note(db.Model):
     trip_id = db.Column(db.Integer, db.ForeignKey('trips.trip_id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
 
+    # relationships to trip and user
     trip = db.relationship('Trip', backref='notes')
     user = db.relationship('User', backref='notes')
 
@@ -131,7 +135,33 @@ class Note(db.Model):
     def get_by_id(cls, note_id):
         """ Get note by ID. """
         return cls.query.get(note_id)
+
+class Photo(db.Model):
+    """ Data model for a photo. """
+
+    __tablename__ = 'photos'
+
+    photo_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    photo = db.Column(db.String(150))
+    trip_id = db.Column(db.Integer, db.ForeignKey('trips.trip_id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+
+    # relationships to trip and user
+    trip = db.relationship('Trip', backref='photos')
+    user = db.relationship('User', backref='photos')
+
+    def __repr__(self):
+        return f'<Photo {self.photo} Trip {self.trip_id} User {self.user_id}'
     
+    @classmethod
+    def create_photo(cls, photo, trip_id, user_id):
+        """ Create a photo. """
+        return cls(photo=photo, trip_id=trip_id, user_id=user_id)
+
+    def get_by_id(cls, photo_id):
+        """ Get photo by ID. """
+        return cls.query.get(photo_id)
+
 
 
 

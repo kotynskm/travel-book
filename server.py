@@ -3,14 +3,18 @@ from flask import Flask, render_template, request, session, redirect, jsonify, f
 import requests
 import os
 from pprint import pprint as pp
-from model import User, Trip, Activity, Note, connect_to_db, db
+from model import User, Trip, Activity, Note, Photo, connect_to_db, db
 from datetime import datetime, timedelta
 from random import choice
 import json
+import cloudinary.uploader
 
 TRIP_IMAGES = ['airplane.jpg', 'airplane2.jpg', 'map.jpg', 'map2.jpg', 'map3.jpg', 'map4.jpg', 'airport.jpg', 'man_airport.jpg', 'globe.jpg'] # populate with images, then use random to send an img to trip_details through /trip/ route
 YELP_API_KEY = os.environ['YELP_API_KEY']
 AVI_API_KEY = os.environ['AVI_API_KEY']
+CLOUDINARY_KEY = os.environ['CLOUDINARY_KEY']
+CLOUDINARY_SECRET = os.environ['CLOUDINARY_SECRET']
+CLOUD_NAME = 'dzkvup9at'
 
 app = Flask(__name__)
 app.secret_key = 'SECRET_KEY'
@@ -271,12 +275,39 @@ def add_note(trip_id):
     user = trip.user
     user_id = user.user_id
     note = request.form.get('activity-note')
-
+    # create a note and add to db
     trip_note = Note.create_note(note, trip_id, user_id)
     db.session.add(trip_note)
     db.session.commit()
 
     return redirect(f'/trip/{trip_id}')
+
+@app.route('/photos/<trip_id>')
+def show_photo_page(trip_id):
+    """ Display photo page. """
+    trip = Trip.get_by_id(trip_id)
+    photos = trip.photos
+
+    return render_template('photos.html', trip=trip, photos=photos)
+
+@app.route('/upload-photo/<trip_id>', methods=['POST'])
+def upload_photo(trip_id):
+    """ Upload a photo. """
+    trip = Trip.get_by_id(trip_id)
+    trip_id = trip.trip_id
+    user = trip.user
+    user_id = user.user_id
+    my_file = request.files['my-file']
+    # call to Cloudinary API
+    result = cloudinary.uploader.upload(my_file, api_key=CLOUDINARY_KEY, api_secret=CLOUDINARY_SECRET, cloud_name=CLOUD_NAME)
+    img_url = result['secure_url']
+    # create a photo and add to db
+    photo = Photo.create_photo(img_url, trip_id, user_id)
+    db.session.add(photo)
+    db.session.commit()
+
+    return redirect(f'/photos/{trip_id}')
+
 
 @app.route('/delete_note/<trip_id>', methods=['POST'])
 def delete_note(trip_id):

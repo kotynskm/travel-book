@@ -65,8 +65,11 @@ body, html {
   }
 
   .icon {
-    display: flex;
-    justify-content: center;
+    text-align: center;
+  }
+
+  .title {
+    text-align: center;
   }
 
   /* h3 {
