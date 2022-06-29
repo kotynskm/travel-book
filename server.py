@@ -311,6 +311,24 @@ def upload_photo(trip_id):
 
     return redirect(f'/photos/{trip_id}')
 
+@app.route('/trip-info')
+def get_trips():
+    """ Get JSON data for trips. """
+    trips = Trip.query.all()
+    trips_list = []
+
+    for trip in trips:
+        trips_list.append({
+            'name': trip.trip_name,
+            'url': trip.trip_image,
+            'city': trip.city
+        })
+    print(trips_list)
+    
+    return jsonify(trips_list)
+
+ 
+
 
 @app.route('/delete_note/<trip_id>', methods=['POST'])
 def delete_note(trip_id):
