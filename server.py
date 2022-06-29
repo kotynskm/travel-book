@@ -314,7 +314,10 @@ def upload_photo(trip_id):
 @app.route('/trip-info')
 def get_trips():
     """ Get JSON data for trips. """
-    trips = Trip.query.all()
+    user_id = session['user_id']
+    user = User.get_by_id(user_id)
+    trips = user.trips
+   
     trips_list = []
 
     for trip in trips:
