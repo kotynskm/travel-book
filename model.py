@@ -18,7 +18,8 @@ class User(db.Model):
     password = db.Column(db.String(150), nullable=False)
 
     # relationship to trips and notes
-    trips = db.relationship('Trip', back_populates='user')
+    trips = db.relationship('Trip', secondary='invitation', back_populates='user')
+
     # user = db.relationship('User', backref='notes')
 
     def __repr__(self):
@@ -55,7 +56,7 @@ class Trip(db.Model):
     depart_city = db.Column(db.String(40), nullable=False)
 
     # relationships to user, activities, and notes
-    user = db.relationship('User', back_populates='trips')
+    user = db.relationship('User', secondary='invitation', back_populates='trips')
     activities = db.relationship('Activity', back_populates='trip')
     # trip = db.relationship('Trip', backref='notes')
 
