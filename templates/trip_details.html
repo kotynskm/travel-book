@@ -7,45 +7,43 @@
 <h2>{{trip.depart_city}} to {{trip.city}}</h2>
 <h3>Trip date {{trip.start_date}} to {{trip.end_date}}</h3>
 
-<div class="activity_links">
-<a href="/api/activities/{{ trip.trip_id }}">Choose activities for your trip!</a><br>
-<a href="/api/restaurants/{{ trip.trip_id }}">Choose restaurants for your trip!</a><br>
+<!-- <div class="activity_links">
 <a href="/api/flights/{{ trip.trip_id }}">Check flights for your trip!</a><br>
-</div>
+</div> -->
 
 <div class="card" style="width: 18rem;">
   <img src="/static/img/icon images/wine.jpg" class="img-thumbnail" alt="a table with two bowls of food and glasses of wine">
   <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <h5 class="card-title">Restaurants</h5>
+    <p class="card-text">Click the link to see top rated local restaurants.</p>
+    <a href="/api/restaurants/{{ trip.trip_id }}" class="btn btn-primary">Choose restaurants!</a>
   </div>
 </div>
 
 <div class="card" style="width: 18rem;">
   <img src="/static/img/icon images/balloons.jpg" class="img-thumbnail" alt="a table with two bowls of food and glasses of wine">
   <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <h5 class="card-title">Activities</h5>
+    <p class="card-text">Click the link to see top rated local activities.</p>
+    <a href="/api/activities/{{ trip.trip_id }}" class="btn btn-primary">Choose activities!</a>
   </div>
 </div>
 
 <div class="card" style="width: 18rem;">
   <img src="/static/img/icon images/calendar2.jpg" class="img-thumbnail" alt="a table with two bowls of food and glasses of wine">
   <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <h5 class="card-title">Calendar</h5>
+    <p class="card-text">Click the link to see your calendar for this trip.</p>
+    <a href="/calendar/{{ trip.trip_id }}" class="btn btn-primary">Schedule your activities!</a>
   </div>
 </div>
 
 <div class="card" style="width: 18rem;">
   <img src="/static/img/icon images/camera.jpg" class="img-thumbnail" alt="a table with two bowls of food and glasses of wine">
   <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="btn btn-primary">Go somewhere</a>
+    <h5 class="card-title">Photos</h5>
+    <p class="card-text">Click the link to go to photo upload for this trip.</p>
+    <a href="/photos/{{ trip.trip_id }}" class="btn btn-primary">Go to photo upload!</a>
   </div>
 </div>
 
@@ -107,15 +105,6 @@
   </div>
 
 </div>
-<div class="calendar-block">
-<h1>View Calendar</h1>
-<a href="/calendar/{{ trip.trip_id }}">Schedule your activities!</a>
-</div>
-<div class="upload-photo">
-  <h1>Upload Photos</h1>
-  <a href="/photos/{{ trip.trip_id }}">Go to photo upload!</a>
-</div>
-
 </div>
 <div id="map"></div>
 
