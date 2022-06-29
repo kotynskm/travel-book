@@ -22,20 +22,12 @@
    
         <div class="col">
             <h3>Current trips planned</h3>
-            <ul>
-                {% for trip in trips %}
-                <div class="trip">
-                  <li><a href="/trip/{{ trip.trip_id }}">{{ trip.trip_name }} in {{ trip.city }}</a></li>
-                  <img src="../static/img/{{trip.trip_image}}">
-                </div>
-                {% endfor %}
-            </ul>
-            </form>
-            </div>
+            <div id="root"></div>
+        </div>
         </div>
     </div>
 
-    <div id="root"></div>
+
     <script type="text/jsx" src="/static/js/react.jsx"></script>
     
 {% endblock %}

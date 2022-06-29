@@ -321,7 +321,8 @@ def get_trips():
         trips_list.append({
             'name': trip.trip_name,
             'url': trip.trip_image,
-            'city': trip.city
+            'city': trip.city,
+            'trip_id': trip.trip_id
         })
     print(trips_list)
     
