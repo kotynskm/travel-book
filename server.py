@@ -327,13 +327,10 @@ def get_trips():
             'city': trip.city,
             'trip_id': trip.trip_id
         })
-    print(trips_list)
     
     return jsonify(trips_list)
 
  
-
-
 @app.route('/delete_note/<trip_id>', methods=['POST'])
 def delete_note(trip_id):
     """ Delete a note from trip. """
