@@ -2,7 +2,6 @@
 from unicodedata import name
 from flask_sqlalchemy import SQLAlchemy
 from datetime import date
-
 from sqlalchemy import nullslast
 
 db = SQLAlchemy()
@@ -161,6 +160,18 @@ class Photo(db.Model):
     def get_by_id(cls, photo_id):
         """ Get photo by ID. """
         return cls.query.get(photo_id)
+
+class Invitation(db.Model):
+    """ Association table between trip and user to invite friends. """
+
+    __tablename__ = 'invitation'
+
+    invitation_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
+    trip_id = db.Column(db.Integer, db.ForeignKey('trips.trip_id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
+
+    def __repr__(self):
+        return f'<Invite ID {self.invitation_id} Trip {self.trip_id} User {self.user_id}'
 
 
 
