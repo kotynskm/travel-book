@@ -21,13 +21,12 @@ CLOUD_NAME = 'dzkvup9at'
 app = Flask(__name__)
 app.secret_key = 'SECRET_KEY'
 
-
+# --- login, create user, registration routes ---
 @app.route('/')
 def show_login_page():
     """ View the Login page. """
     
     return render_template('login.html')
-
 
 @app.route('/login', methods=['POST'])
 def get_login_info():
@@ -44,8 +43,7 @@ def get_login_info():
         flash("The email or password you entered was incorrect.")
         return redirect('/')
 
-    return redirect('/homepage')
-    
+    return redirect('/homepage')  
 
 @app.route('/register')
 def show_registration_page():
@@ -73,6 +71,7 @@ def create_user():
 
     return redirect('/')
 
+# --- routes for creating a trip and adding items to the trip ---
 @app.route('/create-trip', methods=['POST'])
 def create_trip():
     """ Create a new trip for the user. """
@@ -119,6 +118,7 @@ def show_trip(trip_id):
 
     return render_template('trip_details.html',trip=trip, MAPS_API_KEY=MAPS_API_KEY)
 
+# --- routes for calls to Yelp Fusion API ---
 @app.route('/api/activities/<trip_id>')
 def show_activities(trip_id):
     """ Makes a call to the Yelp Fusion API to display activities. """
@@ -153,8 +153,11 @@ def show_restaurants(trip_id):
 
     return render_template('restaurants.html', data=data, trip=trip)
 
+""" --- routes for call to AviationStack API (function DISABLED, free plan does not allow arrival and depart date params) ---
 @app.route('/api/flights/<trip_id>')
 def get_flights(trip_id):
+    # Get flight info from AviationStack API
+
     trip = Trip.get_by_id(trip_id)
     url = 'http://api.aviationstack.com/v1/flights'
     # Get the depart city, arrival city
@@ -173,7 +176,8 @@ def get_flights(trip_id):
     return render_template('flights.html', data=data, trip=trip)
 
 def get_airport_code(city):
-    """ Helper func to get the starter city IATA and end city IATA codes. """
+    # Helper func to get the starter city IATA and end city IATA codes.
+    
     iata_code = None
     # from City, ST grab the city using split and index
     city_name = city.split(',')[0]
@@ -187,8 +191,7 @@ def get_airport_code(city):
             iata_code = obj['code']
 
     airport_file.close()
-    return iata_code
-
+    return iata_code """
 
 @app.route('/create-activity/<trip_id>', methods=['POST'])
 def create_activity(trip_id):
@@ -331,6 +334,7 @@ def get_trips():
     
     return jsonify(trips_list)
 
+# --- routes to add friends to trip ---
 @app.route('/add-friend/<trip_id>', methods=['POST'])
 def add_friend(trip_id):
     """ Add a friend to the current trip. """
@@ -353,8 +357,7 @@ def show_invited_trip_details(trip_id):
 
     return render_template('invited_trip.html', trip=trip)
 
-
- 
+# --- routes to DELETE items from trip ---
 @app.route('/delete_note/<trip_id>', methods=['POST'])
 def delete_note(trip_id):
     """ Delete a note from trip. """
@@ -376,7 +379,8 @@ def delete_activity(trip_id):
     db.session.commit()
 
     return redirect(f'/trip/{trip_id}')
-    
+
+# --- nav bar routes ---
 @app.route('/logout')
 def logout():
     session.pop('user_id', None)
