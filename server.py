@@ -9,6 +9,7 @@ from random import choice
 import json
 import cloudinary.uploader
 from passlib.hash import argon2
+from sqlalchemy.sql import text
 
 TRIP_IMAGES = ['airplane.jpg', 'airplane2.jpg', 'map.jpg', 'map2.jpg', 'map3.jpg', 'map4.jpg', 'airport.jpg', 'man_airport.jpg', 'globe.jpg'] # populate with images, then use random to send an img to trip_details through /trip/ route
 YELP_API_KEY = os.environ['YELP_API_KEY']
@@ -329,6 +330,21 @@ def get_trips():
         })
     
     return jsonify(trips_list)
+
+@app.route('/add-friend/<trip_id>', methods=['POST'])
+def add_friend(trip_id):
+    """ Add a friend to the current trip. """
+    # trip = Trip.get_by_id(trip_id)
+    # trip_id = trip.trip_id
+    # user_id = trip.user.user_id
+
+    # get the friend from the form
+    friend_fname = request.form.get('friend-fname')
+    # get friend using email
+    friend = User.get_by_fname(friend_fname)
+    print(friend)
+
+
 
  
 @app.route('/delete_note/<trip_id>', methods=['POST'])

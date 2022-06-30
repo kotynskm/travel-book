@@ -18,8 +18,7 @@ class User(db.Model):
     password = db.Column(db.String(150), nullable=False)
 
     # relationship to trips and notes
-    trips = db.relationship('Trip', secondary='invitation', back_populates='user')
-
+    trips = db.relationship('Trip', back_populates='user')
     # user = db.relationship('User', backref='notes')
 
     def __repr__(self):
@@ -34,6 +33,11 @@ class User(db.Model):
     def get_by_email(cls, email):
         """ Get user by email. """
         return cls.query.filter(User.email == email).first()
+
+    @classmethod
+    def get_by_fname(cls, fname):
+        return cls.query.filter(User.fname == fname).first()
+
     
     @classmethod
     def create_user(cls, fname, lname, email, password):
@@ -56,8 +60,9 @@ class Trip(db.Model):
     depart_city = db.Column(db.String(40), nullable=False)
 
     # relationships to user, activities, and notes
-    user = db.relationship('User', secondary='invitation', back_populates='trips')
+    user = db.relationship('User', back_populates='trips')
     activities = db.relationship('Activity', back_populates='trip')
+    invited_users = db.relationship('User', secondary='invitation', backref='invited_trips')
     # trip = db.relationship('Trip', backref='notes')
 
     def __repr__(self):
