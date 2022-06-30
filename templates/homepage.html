@@ -32,7 +32,11 @@
                 <li>No invited trips yet.</li>
                 {% endif %}
                 {% for trip in user.invited_trips %}
-                <li>{{trip.trip_name}}</li>
+                <form action="/invited-trip-details/{{ trip.trip_id }}">
+                <li>{{trip.trip_name}}
+                    <button type="submit" class="btn btn-secondary">View Details</button>
+                </li>
+                </form>
                 {% endfor %}
             </ul>
         </div>

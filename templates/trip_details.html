@@ -52,6 +52,9 @@
 <h1>Current Activities</h1>
 <form action="/delete_activity/{{ trip.trip_id }}" method="POST">
 <ul>
+    {% if not trip.activities %}
+    <li>No activities chosen yet. Go to schedule activities to start planning!</li>
+    {% endif %}
     {% for activity in trip.activities %}
     {% if activity.date == None %}
     <li>{{activity.name}}: No date selected yet.<button type="submit" name="activity-id" value="{{activity.activity_id}}">Delete</li>
@@ -93,8 +96,11 @@
   </div>
   <h1>Current Invited Friends</h1>
   <ul>
+    {% if not trip.invited_users %}
+    <li>No friends invited to any trips yet.</li>
+    {% endif %}
     {% for friend in trip.invited_users %}
-    <li>{{friend.fname}}</li>
+    <li>{{friend.fname}} {{friend.lname}}</li>
     {% endfor %}
   </ul>
 </div>

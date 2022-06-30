@@ -346,7 +346,12 @@ def add_friend(trip_id):
 
     return redirect(f'/trip/{trip_id}')
     
+@app.route('/invited-trip-details/<trip_id>')
+def show_invited_trip_details(trip_id):
+    """ Display details page for an invited trip. """
+    trip = Trip.get_by_id(trip_id)
 
+    return render_template('invited_trip.html', trip=trip)
 
 
  
