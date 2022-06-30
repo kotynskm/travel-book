@@ -78,7 +78,6 @@ def create_trip():
     # create a class method that checks if a trip already exists?
     trip_name = request.form.get('trip-name')
     city = request.form.get('city')
-    depart_city = request.form.get('depart_city')
     start_date = request.form.get('start')
     end_date = request.form.get('end')
     user_id = session['user_id']
@@ -94,7 +93,7 @@ def create_trip():
     #     if trip_name == trip.trip_name:
     #         flash("Trip already exists!")
     #     else:
-    trip = Trip.create_trip(user_id, trip_name, city, start_date_converted, end_date_converted, trip_image, depart_city)
+    trip = Trip.create_trip(user_id, trip_name, city, start_date_converted, end_date_converted, trip_image)
     db.session.add(trip)
     db.session.commit()
     flash("Trip created!")

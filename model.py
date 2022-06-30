@@ -57,7 +57,6 @@ class Trip(db.Model):
     start_date = db.Column(db.Date, nullable=False)
     end_date = db.Column(db.Date, nullable=False)
     trip_image = db.Column(db.String(40))
-    depart_city = db.Column(db.String(40), nullable=False)
 
     # relationships to user, activities, and notes
     user = db.relationship('User', back_populates='trips')
@@ -69,9 +68,9 @@ class Trip(db.Model):
         return f'<Trip {self.trip_id} Name {self.trip_name} City {self.city}>'
 
     @classmethod
-    def create_trip(cls, user_id, trip_name, city, start_date, end_date, trip_image, depart_city):
+    def create_trip(cls, user_id, trip_name, city, start_date, end_date, trip_image):
         """ Create a trip. """
-        return cls(user_id=user_id, trip_name=trip_name, city=city, start_date=start_date, end_date=end_date, trip_image=trip_image, depart_city=depart_city)
+        return cls(user_id=user_id, trip_name=trip_name, city=city, start_date=start_date, end_date=end_date, trip_image=trip_image)
 
     @classmethod
     def get_by_id(cls, trip_id):
