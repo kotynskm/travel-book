@@ -122,8 +122,6 @@ def show_trip(trip_id):
 @app.route('/api/activities/<trip_id>')
 def show_activities(trip_id):
     """ Makes a call to the Yelp Fusion API to display activities. """
-    # makes a call to yelp API to display activites in that city
-    # user must specify City, State
     trip = Trip.get_by_id(trip_id)
     
     url = 'https://api.yelp.com/v3/businesses/search'
@@ -140,7 +138,6 @@ def show_activities(trip_id):
 @app.route('/api/restaurants/<trip_id>')
 def show_restaurants(trip_id):
     """ Makes a call to the Yelp Fusion API to display restaurants. """
-    # user must specify City, State
     trip = Trip.get_by_id(trip_id)
     
     url = 'https://api.yelp.com/v3/businesses/search'
@@ -152,6 +149,24 @@ def show_restaurants(trip_id):
     data = res.json()
 
     return render_template('restaurants.html', data=data, trip=trip)
+
+@app.route('/api/search/<trip_id>')
+def show_custom_activities(trip_id):
+    """ Makes a call to the Yelp Fusion API to display custom activities. """
+    trip = Trip.get_by_id(trip_id)
+    # get category from the form
+    custom_category = request.args.get('activity-category')
+    
+    url = 'https://api.yelp.com/v3/businesses/search'
+    headers = {'Authorization': 'Bearer %s' % YELP_API_KEY}
+    location = trip.city
+    params = {'location': location, 'limit':10,'sort_by':'rating', 'categories':f'{custom_category}'}
+
+    res = requests.get(url,headers=headers,params=params)
+    data = res.json()
+
+    return render_template('activities.html', data=data, trip=trip)
+
 
 """ --- routes for call to AviationStack API (function DISABLED, free plan does not allow arrival and depart date params) ---
 @app.route('/api/flights/<trip_id>')
@@ -177,7 +192,7 @@ def get_flights(trip_id):
 
 def get_airport_code(city):
     # Helper func to get the starter city IATA and end city IATA codes.
-    
+
     iata_code = None
     # from City, ST grab the city using split and index
     city_name = city.split(',')[0]

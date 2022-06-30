@@ -31,6 +31,19 @@
 </div>
 
 <div class="card" style="width: 18rem;">
+  <img src="/static/img/icon images/dandelion.jpg" class="img-thumbnail" alt="a table with two bowls of food and glasses of wine">
+  <div class="card-body">
+    <h5 class="card-title">Choose your own activity</h5>
+    Enter a category:
+    <form action="/api/search/{{ trip.trip_id }}">
+    <input type="text" name="activity-category">
+    <button class="btn btn-primary" type="submit">Search custom activities!</button>
+    </form>
+  </div>
+</div>
+
+
+<div class="card" style="width: 18rem;">
   <img src="/static/img/icon images/calendar2.jpg" class="img-thumbnail" alt="a table with two bowls of food and glasses of wine">
   <div class="card-body">
     <h5 class="card-title">Calendar</h5>
@@ -84,7 +97,7 @@
 <div class="add-friends">
 <h1>Add Friends</h1>
 <form action="/add-friend/{{ trip.trip_id }}", method="POST">
-  <label for="friend-fname">Enter your friend's name</label><br>
+  <label for="friend-fname">Enter your friend's name:</label><br>
   <input type="text" id="friend-fname" name="friend-fname"><br>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
