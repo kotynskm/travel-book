@@ -40,7 +40,6 @@ def get_login_info():
 
     if argon2.verify(password, hashed):
         session['user_id'] = user.user_id
-        flash(f'Welcome back, {user.fname}!')
     else:
         flash("The email or password you entered was incorrect.")
         return redirect('/')
@@ -109,8 +108,9 @@ def user_page():
     user_id = session['user_id']
     user = User.get_by_id(user_id)
     trips = user.trips
+    invited_trips = user.invited_trips
    
-    return render_template('homepage.html',trips=trips, user=user)
+    return render_template('homepage.html',trips=trips, user=user, invited_trips=invited_trips)
 
 @app.route('/trip/<trip_id>')
 def show_trip(trip_id):
@@ -334,15 +334,18 @@ def get_trips():
 @app.route('/add-friend/<trip_id>', methods=['POST'])
 def add_friend(trip_id):
     """ Add a friend to the current trip. """
-    # trip = Trip.get_by_id(trip_id)
-    # trip_id = trip.trip_id
-    # user_id = trip.user.user_id
-
-    # get the friend from the form
+    trip = Trip.get_by_id(trip_id)
+    # get the friend's name from the form
     friend_fname = request.form.get('friend-fname')
-    # get friend using email
+    # get friend using fname
     friend = User.get_by_fname(friend_fname)
-    print(friend)
+    # add friend to the invited users of the trip
+    trip.invited_users.append(friend)
+    db.session.commit()
+    flash("Friend added to trip!")
+
+    return redirect(f'/trip/{trip_id}')
+    
 
 
 

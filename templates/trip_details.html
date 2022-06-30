@@ -85,6 +85,19 @@
   <input type="text" id="friend-fname" name="friend-fname"><br>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+ <!-- Flash messages -->
+ <div class="flash_msg">
+  {% for msg in get_flashed_messages() %}
+      <span>{{ msg }}</span>
+  {% endfor %}
+  </div>
+  <h1>Current Invited Friends</h1>
+  <ul>
+    {% for friend in trip.invited_users %}
+    <li>{{friend.fname}}</li>
+    {% endfor %}
+  </ul>
+</div>
 </div>
 
   <!-- Modal -->

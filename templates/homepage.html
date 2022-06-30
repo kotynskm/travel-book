@@ -24,6 +24,18 @@
             <h3>Current trips planned</h3>
             <div id="root"></div>
         </div>
+
+        <div class="col">
+            <h3>Current invited trips</h3>
+            <ul>
+                {% if not user.invited_trips %}
+                <li>No invited trips yet.</li>
+                {% endif %}
+                {% for trip in user.invited_trips %}
+                <li>{{trip.trip_name}}</li>
+                {% endfor %}
+            </ul>
+        </div>
         </div>
     </div>
 
