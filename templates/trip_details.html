@@ -3,15 +3,20 @@
 
 {% block body %}
 <div class="container">
-<h1>Your trip {{trip.trip_name}}</h1>
-<h2>{{trip.depart_city}} to {{trip.city}}</h2>
-<h3>Trip date {{trip.start_date}} to {{trip.end_date}}</h3>
-
+<h1>Your trip {{ trip.trip_name }} to {{ trip.city }}</h1>
+<h3>Trip date {{ trip.start_date }} to {{ trip.end_date }}</h3>
+<!-- Flash messages -->
+<div class="flash_msg">
+  {% for msg in get_flashed_messages() %}
+      <span>{{ msg }}</span>
+  {% endfor %}
+  </div>
 
 <!-- Link for API call to AviationStack - disabled this functionality
   <a href="/api/flights/{{ trip.trip_id }}">Check flights for your trip!</a><br> -->
 
-
+<div class="row">
+  <div class="col d-flex justify-content-around">
 <div class="card" style="width: 18rem;">
   <img src="/static/img/icon images/wine.jpg" class="img-thumbnail" alt="a table with two bowls of food and glasses of wine">
   <div class="card-body">
@@ -20,7 +25,9 @@
     <a href="/api/restaurants/{{ trip.trip_id }}" class="btn btn-primary">Choose restaurants!</a>
   </div>
 </div>
+</div>
 
+<div class="col d-flex justify-content-around">
 <div class="card" style="width: 18rem;">
   <img src="/static/img/icon images/balloons.jpg" class="img-thumbnail" alt="a table with two bowls of food and glasses of wine">
   <div class="card-body">
@@ -29,20 +36,28 @@
     <a href="/api/activities/{{ trip.trip_id }}" class="btn btn-primary">Choose activities!</a>
   </div>
 </div>
+</div>
 
+<div class="col d-flex justify-content-around">
 <div class="card" style="width: 18rem;">
   <img src="/static/img/icon images/dandelion.jpg" class="img-thumbnail" alt="a table with two bowls of food and glasses of wine">
   <div class="card-body">
     <h5 class="card-title">Choose your own activity</h5>
     Enter a category:
     <form action="/api/search/{{ trip.trip_id }}">
-    <input type="text" name="activity-category">
-    <button class="btn btn-primary" type="submit">Search custom activities!</button>
+    <input type="text" name="activity-category" placeholder="Search">
+    <button class="btn btn-primary" type="submit">Find custom activities!</button>
     </form>
   </div>
 </div>
+</div>
+</div>
+
+<hr>
 
 
+<div class="row">
+  <div class="col d-flex justify-content-around">
 <div class="card" style="width: 18rem;">
   <img src="/static/img/icon images/calendar2.jpg" class="img-thumbnail" alt="a table with two bowls of food and glasses of wine">
   <div class="card-body">
@@ -51,7 +66,9 @@
     <a href="/calendar/{{ trip.trip_id }}" class="btn btn-primary">Schedule your activities!</a>
   </div>
 </div>
+</div>
 
+<div class="col d-flex justify-content-around">
 <div class="card" style="width: 18rem;">
   <img src="/static/img/icon images/camera.jpg" class="img-thumbnail" alt="a table with two bowls of food and glasses of wine">
   <div class="card-body">
@@ -60,6 +77,10 @@
     <a href="/photos/{{ trip.trip_id }}" class="btn btn-primary">Go to photo upload!</a>
   </div>
 </div>
+</div>
+</div>
+
+<hr>
 
 <div class="current_activities">
 <h1>Current Activities</h1>
@@ -70,9 +91,9 @@
     {% endif %}
     {% for activity in trip.activities %}
     {% if activity.date == None %}
-    <li>{{activity.name}}: No date selected yet.<button type="submit" name="activity-id" value="{{activity.activity_id}}">Delete</li>
+    <li>{{ activity.name }}: No date selected yet.<button type="submit" name="activity-id" value="{{activity.activity_id}}">Delete</li>
     {% else %}
-    <li>{{activity.name}}: Scheduled on {{activity.date}}<button type="submit" name="activity-id" value="{{activity.activity_id}}">Delete</li>
+    <li>{{ activity.name }}: Scheduled on {{ activity.date }}<button type="submit" name="activity-id" value="{{ activity.activity_id }}">Delete</li>
     {% endif %}
     {% endfor %}
 </ul>
@@ -88,7 +109,7 @@
 <form action="/delete_note/{{ trip.trip_id }}" method="POST">
 <ul>
   {% for note in trip.notes %}
-  <li>{{note.note}}<button type="submit" name="note-id" value="{{note.note_id}}">Delete</li>
+  <li>{{note.note}}<button type="submit" name="note-id" value="{{ note.note_id }}">Delete</li>
   {% endfor %}
 </ul>
 </form>
@@ -98,22 +119,17 @@
 <h1>Add Friends</h1>
 <form action="/add-friend/{{ trip.trip_id }}", method="POST">
   <label for="friend-fname">Enter your friend's name:</label><br>
-  <input type="text" id="friend-fname" name="friend-fname"><br>
+  <input type="text" id="friend-fname" name="friend-fname" placeholder="Search"><br>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
- <!-- Flash messages -->
- <div class="flash_msg">
-  {% for msg in get_flashed_messages() %}
-      <span>{{ msg }}</span>
-  {% endfor %}
-  </div>
+ 
   <h1>Current Invited Friends</h1>
   <ul>
     {% if not trip.invited_users %}
     <li>No friends invited to any trips yet.</li>
     {% endif %}
     {% for friend in trip.invited_users %}
-    <li>{{friend.fname}} {{friend.lname}}</li>
+    <li>{{ friend.fname }} {{ friend.lname }}</li>
     {% endfor %}
   </ul>
 </div>
@@ -128,7 +144,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form action="/submit_note/{{trip.trip_id}}" method="POST">
+          <form action="/submit_note/{{ trip.trip_id }}" method="POST">
             <div class="form-group">
                 <label for="activity-note">Add Note</label>
                 <input type="text" class="activity-note" name="activity-note" placeholder="Your note here!">
