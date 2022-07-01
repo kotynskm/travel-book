@@ -179,7 +179,7 @@ def show_weather(trip_id):
 
     res = requests.get(f'https://api.openweathermap.org/data/2.5/onecall?lat={location.latitude}&lon={location.longitude}&units={units}&appid={OPEN_WEATHER_KEY}')
     data = res.json()
-    
+    pp(data)
     return render_template('weather.html', data=data, trip=trip)
 
 """ --- routes for call to AviationStack API (function DISABLED, free plan does not allow arrival and depart date params) ---
