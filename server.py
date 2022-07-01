@@ -352,13 +352,15 @@ def get_trips():
     trips = user.trips
    
     trips_list = []
-
+    
     for trip in trips:
         trips_list.append({
             'name': trip.trip_name,
             'url': trip.trip_image,
             'city': trip.city,
-            'trip_id': trip.trip_id
+            'trip_id': trip.trip_id,
+            'start_date': trip.start_date,
+            'end_date': trip.end_date
         })
     
     return jsonify(trips_list)

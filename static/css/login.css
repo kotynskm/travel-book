@@ -72,6 +72,15 @@ body, html {
     text-align: center;
   }
 
+  .hover {
+    background-color: white;
+    display: inline-block;
+
+}
+  .hover:hover {
+    opacity: .8;
+}
+
   /* h3 {
     text-align: center;
     font-size: x-large;

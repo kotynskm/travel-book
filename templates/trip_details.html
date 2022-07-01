@@ -4,7 +4,7 @@
 {% block body %}
 <div class="container">
 <h1>Your trip {{ trip.trip_name }} to {{ trip.city }}</h1>
-<h3>Trip date {{ trip.start_date }} to {{ trip.end_date }}</h3>
+<h3>Trip date {{ trip.start_date.strftime('%m-%d-%Y') }} to {{ trip.end_date.strftime('%m-%d-%Y') }}</h3>
 <!-- Flash messages -->
 <div class="flash_msg">
   {% for msg in get_flashed_messages() %}
@@ -91,7 +91,7 @@
     {% if activity.date == None %}
     <li>{{ activity.name }}: No date selected yet.<button type="submit" name="activity-id" value="{{activity.activity_id}}">Delete</li>
     {% else %}
-    <li>{{ activity.name }}: Scheduled on {{ activity.date }}<button type="submit" name="activity-id" value="{{ activity.activity_id }}">Delete</li>
+    <li>{{ activity.name }}: Scheduled on {{ activity.date.strftime('%m-%d-%Y') }}<button type="submit" name="activity-id" value="{{ activity.activity_id }}">Delete</li>
     {% endif %}
     {% endfor %}
 </ul>
@@ -135,7 +135,7 @@
 
 <div class="weather">
   <form action="/api/open-weather/{{ trip.trip_id }}">
-  <button type="submit">Show me the weather</button>
+  <button type="submit" class="btn btn-primary">Show me the weather</button>
 </form>
 </div>
 
