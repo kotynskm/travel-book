@@ -16,8 +16,8 @@
   <a href="/api/flights/{{ trip.trip_id }}">Check flights for your trip!</a><br> -->
 
 <div class="row">
-  <div class="col d-flex justify-content-around">
-<div class="card" style="width: 18rem;">
+  <div class="col">
+<div class="card" style="width: 15rem;">
   <img src="/static/img/icon images/wine.jpg" class="img-thumbnail" alt="a table with two bowls of food and glasses of wine">
   <div class="card-body">
     <h5 class="card-title">Restaurants</h5>
@@ -27,8 +27,8 @@
 </div>
 </div>
 
-<div class="col d-flex justify-content-around">
-<div class="card" style="width: 18rem;">
+<div class="col">
+<div class="card" style="width: 15rem;">
   <img src="/static/img/icon images/balloons.jpg" class="img-thumbnail" alt="a table with two bowls of food and glasses of wine">
   <div class="card-body">
     <h5 class="card-title">Activities</h5>
@@ -38,11 +38,11 @@
 </div>
 </div>
 
-<div class="col d-flex justify-content-around">
-<div class="card" style="width: 18rem;">
-  <img src="/static/img/icon images/dandelion.jpg" class="img-thumbnail" alt="a table with two bowls of food and glasses of wine">
+<div class="col">
+<div class="card" style="width: 15rem;">
+  <img src="/static/img/icon images/sunset.jpg" class="img-thumbnail" alt="a table with two bowls of food and glasses of wine">
   <div class="card-body">
-    <h5 class="card-title">Choose your own activity</h5>
+    <h5 class="card-title">Choose your own</h5>
     Enter a category:
     <form action="/api/search/{{ trip.trip_id }}">
     <input type="text" name="activity-category" placeholder="Search">
@@ -51,34 +51,32 @@
   </div>
 </div>
 </div>
-</div>
 
-<hr>
-
-
-<div class="row">
-  <div class="col d-flex justify-content-around">
-<div class="card" style="width: 18rem;">
-  <img src="/static/img/icon images/calendar2.jpg" class="img-thumbnail" alt="a table with two bowls of food and glasses of wine">
-  <div class="card-body">
-    <h5 class="card-title">Calendar</h5>
-    <p class="card-text">Click the link to see your calendar for this trip.</p>
-    <a href="/calendar/{{ trip.trip_id }}" class="btn btn-primary">Schedule your activities!</a>
+<div class="col">
+  <div class="card" style="width: 15rem;">
+    <img src="/static/img/icon images/calendar3.jpg" class="img-thumbnail" alt="a table with two bowls of food and glasses of wine">
+    <div class="card-body">
+      <h5 class="card-title">Calendar</h5>
+      <p class="card-text">Click the link to see your calendar for this trip.</p>
+      <a href="/calendar/{{ trip.trip_id }}" class="btn btn-primary">Schedule your activities!</a>
+    </div>
   </div>
-</div>
+  </div>
+
+  <div class="col">
+    <div class="card" style="width: 15rem;">
+      <img src="/static/img/icon images/camera.jpg" class="img-thumbnail" alt="a table with two bowls of food and glasses of wine">
+      <div class="card-body">
+        <h5 class="card-title">Photos</h5>
+        <p class="card-text">Click the link to go to photo upload for this trip.</p>
+        <a href="/photos/{{ trip.trip_id }}" class="btn btn-primary">Go to photo upload!</a>
+      </div>
+    </div>
+    </div>
+
 </div>
 
-<div class="col d-flex justify-content-around">
-<div class="card" style="width: 18rem;">
-  <img src="/static/img/icon images/camera.jpg" class="img-thumbnail" alt="a table with two bowls of food and glasses of wine">
-  <div class="card-body">
-    <h5 class="card-title">Photos</h5>
-    <p class="card-text">Click the link to go to photo upload for this trip.</p>
-    <a href="/photos/{{ trip.trip_id }}" class="btn btn-primary">Go to photo upload!</a>
-  </div>
-</div>
-</div>
-</div>
+
 
 <hr>
 
@@ -133,6 +131,12 @@
     {% endfor %}
   </ul>
 </div>
+</div>
+
+<div class="weather">
+  <form action="/api/open-weather/{{ trip.trip_id }}">
+  <button type="submit">Show me the weather</button>
+</form>
 </div>
 
   <!-- Modal -->

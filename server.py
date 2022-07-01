@@ -10,6 +10,7 @@ import json
 import cloudinary.uploader
 from passlib.hash import argon2
 from sqlalchemy.sql import text
+from geopy.geocoders import Nominatim
 
 TRIP_IMAGES = ['airplane.jpg', 'airplane2.jpg', 'map.jpg', 'map2.jpg', 'map3.jpg', 'map4.jpg', 'airport.jpg', 'man_airport.jpg', 'globe.jpg'] # populate with images, then use random to send an img to trip_details through /trip/ route
 YELP_API_KEY = os.environ['YELP_API_KEY']
@@ -17,6 +18,7 @@ AVI_API_KEY = os.environ['AVI_API_KEY']
 CLOUDINARY_KEY = os.environ['CLOUDINARY_KEY']
 CLOUDINARY_SECRET = os.environ['CLOUDINARY_SECRET']
 CLOUD_NAME = 'dzkvup9at'
+OPEN_WEATHER_KEY = os.environ['OPEN_WEATHER_KEY']
 
 app = Flask(__name__)
 app.secret_key = 'SECRET_KEY'
@@ -166,6 +168,19 @@ def show_custom_activities(trip_id):
 
     return render_template('activities.html', data=data, trip=trip)
 
+@app.route('/api/open-weather/<trip_id>')
+def show_weather(trip_id):
+    """ Makes a call to OpenWeather API to display the weather. """
+    trip = Trip.get_by_id(trip_id)
+    location_city = trip.city
+    units = 'imperial'
+    geolocator = Nominatim(user_agent="MyApp")
+    location = geolocator.geocode(location_city)
+
+    res = requests.get(f'https://api.openweathermap.org/data/2.5/onecall?lat={location.latitude}&lon={location.longitude}&units={units}&appid={OPEN_WEATHER_KEY}')
+    data = res.json()
+    
+    return render_template('weather.html', data=data, trip=trip)
 
 """ --- routes for call to AviationStack API (function DISABLED, free plan does not allow arrival and depart date params) ---
 @app.route('/api/flights/<trip_id>')
