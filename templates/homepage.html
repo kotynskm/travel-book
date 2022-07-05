@@ -1,6 +1,14 @@
 {% extends 'base.html' %}
 {% block body %}
 <h1>Welcome, {{user.fname}}!</h1>
+
+<!-- Google map -->
+<div id="main"></div>
+<script src="/static/js/main_map.js"></script>
+<script async
+    src="https://maps.googleapis.com/maps/api/js?key={{MAPS_API_KEY}}&callback=initMap">
+</script>
+
     <div class="container">
         <div class="row justify-content-center">
             <div class="col">

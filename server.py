@@ -109,15 +109,16 @@ def user_page():
     user = User.get_by_id(user_id)
     trips = user.trips
     invited_trips = user.invited_trips
+    MAPS_API_KEY = os.environ['MAPS_API_KEY']
    
-    return render_template('homepage.html',trips=trips, user=user, invited_trips=invited_trips)
+    return render_template('homepage.html', trips=trips, user=user, invited_trips=invited_trips, MAPS_API_KEY=MAPS_API_KEY)
 
 @app.route('/trip/<trip_id>')
 def show_trip(trip_id):
     trip = Trip.get_by_id(trip_id)
     MAPS_API_KEY = os.environ['MAPS_API_KEY']
 
-    return render_template('trip_details.html',trip=trip, MAPS_API_KEY=MAPS_API_KEY)
+    return render_template('trip_details.html', trip=trip, MAPS_API_KEY=MAPS_API_KEY)
 
 # --- routes for calls to Yelp Fusion API ---
 @app.route('/api/activities/<trip_id>')
@@ -179,7 +180,6 @@ def show_weather(trip_id):
 
     res = requests.get(f'https://api.openweathermap.org/data/2.5/onecall?lat={location.latitude}&lon={location.longitude}&units={units}&appid={OPEN_WEATHER_KEY}')
     data = res.json()
-    pp(data)
     return render_template('weather.html', data=data, trip=trip)
 
 """ --- routes for call to AviationStack API (function DISABLED, free plan does not allow arrival and depart date params) ---
@@ -239,6 +239,8 @@ def create_activity(trip_id):
 
     return redirect(f'/trip/{trip_id}')
 
+# --- routes for Google Maps API markers --- #
+
 @app.route('/map-coordinates/<int:trip_id>')
 def marker_info(trip_id):
     """ Get JSON data for map markers. """
@@ -255,6 +257,40 @@ def marker_info(trip_id):
             'zipcode': activity.zipcode
         })
     return jsonify(activities)
+
+@app.route('/main-map-coordinates')
+def main_marker_info():
+    # get the user from session
+    user_id = session['user_id']
+    user = User.get_by_id(user_id)
+    # get the trips from user
+    all_trips = user.trips
+
+    cities = []
+    for trip in all_trips:
+        cities.append({
+            trip.city
+        })
+    
+    # geocode for lat/long for trip city
+    coords = []
+    geolocator = Nominatim(user_agent="MyApp")
+    for city in cities:
+        location = geolocator.geocode(city)
+        coords.append({
+            'lat': location.latitude,
+            'lng': location.longitude
+        })
+
+    # get trip name and trip city
+    trips = []
+    for trip in all_trips:
+        trips.append({
+            'name': trip.trip_name,
+            'city': trip.city,
+        })
+
+    return jsonify(coords)
 
 @app.route('/calendar/<trip_id>')
 def view_calendar(trip_id):
