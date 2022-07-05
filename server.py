@@ -266,30 +266,25 @@ def main_marker_info():
     # get the trips from user
     all_trips = user.trips
 
+    # list to get trip city and trip name
     cities = []
     for trip in all_trips:
         cities.append({
-            trip.city
+            'city_name': trip.city,
+            'trip_name': trip.trip_name
         })
     
-    # geocode for lat/long for trip city
+    # geocode for lat/long for trip city and add to coords list
     coords = []
     geolocator = Nominatim(user_agent="MyApp")
     for city in cities:
-        location = geolocator.geocode(city)
+        location = geolocator.geocode(city['city_name'])
         coords.append({
             'lat': location.latitude,
-            'lng': location.longitude
+            'lng': location.longitude,
+            'trip_name': city['trip_name']
         })
-
-    # get trip name and trip city
-    trips = []
-    for trip in all_trips:
-        trips.append({
-            'name': trip.trip_name,
-            'city': trip.city,
-        })
-
+        
     return jsonify(coords)
 
 @app.route('/calendar/<trip_id>')
