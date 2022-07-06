@@ -22,7 +22,7 @@
   <div class="card-body">
     <h5 class="card-title">Restaurants</h5>
     <p class="card-text">Click the link to see top rated local restaurants.</p>
-    <a href="/api/restaurants/{{ trip.trip_id }}" class="btn btn-primary">Choose restaurants!</a>
+    <a href="/api/restaurants/{{ trip.trip_id }}" class="btn btn-outline-info">Choose restaurants!</a>
   </div>
 </div>
 </div>
@@ -33,7 +33,7 @@
   <div class="card-body">
     <h5 class="card-title">Activities</h5>
     <p class="card-text">Click the link to see top rated local activities.</p>
-    <a href="/api/activities/{{ trip.trip_id }}" class="btn btn-primary">Choose activities!</a>
+    <a href="/api/activities/{{ trip.trip_id }}" class="btn btn-outline-info">Choose activities!</a>
   </div>
 </div>
 </div>
@@ -46,7 +46,7 @@
     Enter a category:
     <form action="/api/search/{{ trip.trip_id }}">
     <input type="text" name="activity-category" placeholder="Search">
-    <button class="btn btn-primary" type="submit">Find custom activities!</button>
+    <button class="btn btn-outline-info" type="submit">Find custom activities!</button>
     </form>
   </div>
 </div>
@@ -58,7 +58,7 @@
     <div class="card-body">
       <h5 class="card-title">Calendar</h5>
       <p class="card-text">Click the link to see your calendar for this trip.</p>
-      <a href="/calendar/{{ trip.trip_id }}" class="btn btn-primary">Schedule your activities!</a>
+      <a href="/calendar/{{ trip.trip_id }}" class="btn btn-outline-info">Schedule your activities!</a>
     </div>
   </div>
   </div>
@@ -69,7 +69,7 @@
       <div class="card-body">
         <h5 class="card-title">Photos</h5>
         <p class="card-text">Click the link to go to photo upload for this trip.</p>
-        <a href="/photos/{{ trip.trip_id }}" class="btn btn-primary">Go to photo upload!</a>
+        <a href="/photos/{{ trip.trip_id }}" class="btn btn-outline-info">Go to photo upload!</a>
       </div>
     </div>
     </div>
@@ -100,7 +100,7 @@
 <div class="current_notes">
 <h1>My Notes</h1>
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Add a note
 </button>
 
@@ -118,7 +118,7 @@
 <form action="/add-friend/{{ trip.trip_id }}", method="POST">
   <label for="friend-fname">Enter your friend's name:</label><br>
   <input type="text" id="friend-fname" name="friend-fname" placeholder="Search"><br>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-outline-info">Submit</button>
 </form>
  
   <h1>Current Invited Friends</h1>
@@ -135,7 +135,7 @@
 
 <div class="weather">
   <form action="/api/open-weather/{{ trip.trip_id }}">
-  <button type="submit" class="btn btn-primary">Show me the weather</button>
+  <button type="submit" class="btn btn-outline-info">Show me the weather</button>
 </form>
 </div>
 
@@ -157,7 +157,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="submit" class="btn btn-info">Submit</button>
         </div>
       </form>
       </div>

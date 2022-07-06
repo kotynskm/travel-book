@@ -22,7 +22,7 @@
             <input type="date" name="start" id="start"></br>
             <label for="end-date">Enter an end date</label><br>
             <input type="date" name="end" id="end"></br>
-            <button class="btn btn-secondary" type="submit">Submit</button>
+            <button class="btn btn btn-outline-info" type="submit">Submit</button>
         </form>
         </div>
    
@@ -40,7 +40,7 @@
                 {% for trip in user.invited_trips %}
                 <form action="/invited-trip-details/{{ trip.trip_id }}">
                 <li>{{trip.trip_name}}
-                    <button type="submit" class="btn btn-secondary">View Details</button>
+                    <button type="submit" class="btn btn-outline-info">View Details</button>
                 </li>
                 </form>
                 {% endfor %}

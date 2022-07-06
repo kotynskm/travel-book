@@ -30,9 +30,13 @@ body, html {
   .login-button {
     padding: 10px 20px;
     display: flex;
-    margin-left: 38px;
+    margin-left: 60px;
     border-radius: 10px;
     background-color: white;
+  }
+
+  .login-text {
+    text-align: center;
   }
 
   .login-button:hover {
