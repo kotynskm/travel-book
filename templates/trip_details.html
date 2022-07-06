@@ -17,62 +17,73 @@
 
 <div class="row">
   <div class="col">
-<div class="card" style="width: 15rem;">
+<div class="card" style="width: 12rem;">
   <img src="/static/img/icon images/wine.jpg" class="img-thumbnail" alt="a table with two bowls of food and glasses of wine">
   <div class="card-body">
     <h5 class="card-title">Restaurants</h5>
-    <p class="card-text">Click the link to see top rated local restaurants.</p>
-    <a href="/api/restaurants/{{ trip.trip_id }}" class="btn btn-outline-info">Choose restaurants!</a>
+    <p class="card-text">View top rated restaurants.</p>
+    <a href="/api/restaurants/{{ trip.trip_id }}" class="btn btn-outline-info card">Click here!</a>
   </div>
 </div>
 </div>
 
 <div class="col">
-<div class="card" style="width: 15rem;">
+<div class="card" style="width: 12rem;">
   <img src="/static/img/icon images/balloons.jpg" class="img-thumbnail" alt="a table with two bowls of food and glasses of wine">
   <div class="card-body">
     <h5 class="card-title">Activities</h5>
-    <p class="card-text">Click the link to see top rated local activities.</p>
-    <a href="/api/activities/{{ trip.trip_id }}" class="btn btn-outline-info">Choose activities!</a>
+    <p class="card-text">View top rated activities.</p>
+    <a href="/api/activities/{{ trip.trip_id }}" class="btn btn-outline-info card">Click here!</a>
   </div>
 </div>
 </div>
 
 <div class="col">
-<div class="card" style="width: 15rem;">
+<div class="card" style="width: 12rem;">
   <img src="/static/img/icon images/sunset.jpg" class="img-thumbnail" alt="a table with two bowls of food and glasses of wine">
   <div class="card-body">
     <h5 class="card-title">Choose your own</h5>
     Enter a category:
     <form action="/api/search/{{ trip.trip_id }}">
-    <input type="text" name="activity-category" placeholder="Search">
-    <button class="btn btn-outline-info" type="submit">Find custom activities!</button>
+    <input type="text" id="category-search" name="activity-category" placeholder="Search">
+    <button class="btn btn-outline-info card-btn" type="submit">Click here!</button>
     </form>
   </div>
 </div>
 </div>
 
 <div class="col">
-  <div class="card" style="width: 15rem;">
+  <div class="card" style="width: 12rem;">
     <img src="/static/img/icon images/calendar3.jpg" class="img-thumbnail" alt="a table with two bowls of food and glasses of wine">
     <div class="card-body">
       <h5 class="card-title">Calendar</h5>
-      <p class="card-text">Click the link to see your calendar for this trip.</p>
-      <a href="/calendar/{{ trip.trip_id }}" class="btn btn-outline-info">Schedule your activities!</a>
+      <p class="card-text">View your calendar events.</p>
+      <a href="/calendar/{{ trip.trip_id }}" class="btn btn-outline-info card">Click here!</a>
     </div>
   </div>
   </div>
 
   <div class="col">
-    <div class="card" style="width: 15rem;">
+    <div class="card" style="width: 12rem;">
       <img src="/static/img/icon images/camera.jpg" class="img-thumbnail" alt="a table with two bowls of food and glasses of wine">
       <div class="card-body">
         <h5 class="card-title">Photos</h5>
-        <p class="card-text">Click the link to go to photo upload for this trip.</p>
-        <a href="/photos/{{ trip.trip_id }}" class="btn btn-outline-info">Go to photo upload!</a>
+        <p class="card-text">Go to your photo upload.</p>
+        <a href="/photos/{{ trip.trip_id }}" class="btn btn-outline-info card">Click here!</a>
       </div>
     </div>
     </div>
+
+    <div class="col">
+      <div class="card" style="width: 12rem;">
+        <img src="/static/img/icon images/rainbow.jpg" class="img-thumbnail" alt="a table with two bowls of food and glasses of wine">
+        <div class="card-body">
+          <h5 class="card-title">Weather</h5>
+          <p class="card-text">View upcoming weather.</p>
+          <a href="/api/open-weather/{{ trip.trip_id }}" class="btn btn-outline-info card">Click here!</a>
+        </div>
+      </div>
+      </div>
 
 </div>
 
@@ -89,9 +100,9 @@
     {% endif %}
     {% for activity in trip.activities %}
     {% if activity.date == None %}
-    <li>{{ activity.name }}: No date selected yet.<button type="submit" name="activity-id" value="{{activity.activity_id}}">Delete</li>
+    <li>{{ activity.name }}: No date selected yet. <button type="submit" class="btn btn-outline-info" name="activity-id" value="{{activity.activity_id}}">Delete</li>
     {% else %}
-    <li>{{ activity.name }}: Scheduled on {{ activity.date.strftime('%m-%d-%Y') }}<button type="submit" name="activity-id" value="{{ activity.activity_id }}">Delete</li>
+    <li>{{ activity.name }}: Scheduled on {{ activity.date.strftime('%m-%d-%Y') }} <button type="submit" class="btn btn-outline-info" name="activity-id" value="{{ activity.activity_id }}">Delete</li>
     {% endif %}
     {% endfor %}
 </ul>
@@ -133,11 +144,6 @@
 </div>
 </div>
 
-<div class="weather">
-  <form action="/api/open-weather/{{ trip.trip_id }}">
-  <button type="submit" class="btn btn-outline-info">Show me the weather</button>
-</form>
-</div>
 
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
