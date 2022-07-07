@@ -1,36 +1,38 @@
 {% extends 'base.html' %}
 {% block body %}
-
+<div class="activity-title">
 <h1>Activities in {{trip.city}}</h1>
-<div class="container-fluid">
+</div>
+
+<div class="container">
 <div class="row">
 
 <div class="col">
-<div class="businesses-loop">
+<div class="business-loop">
       <form action="/create-activity/{{trip.trip_id}}", method="POST"> 
         {% for business in data.businesses %}
         <div class="business">
-          <h3>{{business.name}} {{business.rating}}</h3>
+          <h3>{{business.name}}</h3>
 
           <div class="image">
             <img src="{{business.image_url}}" width="500px" height="500px">
             </div>
           
-            <button type="submit" class="btn btn-light busy-button" id="business-button" value="{{business.id}}" name="business-info">Click for more info</button>
+            <button type="submit" class="btn btn-light" id="business-button" value="{{business.id}}" name="business-info">Click for more info</button>
           
           <input type="checkbox" name="business" value="{{business.name}},{{business.id}},
             {{business.coordinates.latitude}},{{business.coordinates.longitude}},{{business.phone}},{{business.location.address1}},
             {{business.location.zip_code}}">
         </div>
         {% endfor %}   
-        <button type="submit">Submit</button>
+        <button type="submit" class="btn btn-light">Submit</button>
       </form>    
 </div>
 </div>
 
 
 <div class="col">
-<div class="result"></div>
+<div class="result sticky-top"></div>
 </div>
 
 </div>

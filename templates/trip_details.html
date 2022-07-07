@@ -3,6 +3,7 @@
 
 {% block body %}
 <div class="container">
+<div class="trip-details">
 <h1>Your trip {{ trip.trip_name }} to {{ trip.city }}</h1>
 <h3>Trip date {{ trip.start_date.strftime('%m-%d-%Y') }} to {{ trip.end_date.strftime('%m-%d-%Y') }}</h3>
 <!-- Flash messages -->
@@ -11,6 +12,7 @@
       <span>{{ msg }}</span>
   {% endfor %}
   </div>
+</div>
 
 <!-- Link for API call to AviationStack - disabled this functionality
   <a href="/api/flights/{{ trip.trip_id }}">Check flights for your trip!</a><br> -->

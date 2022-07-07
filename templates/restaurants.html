@@ -2,7 +2,7 @@
 {% block body %}
 
 <h1>Restaurants in {{trip.city}}</h1>
-<div class="container-fluid">
+<div class="container">
 <div class="row">
 
 <div class="col">
@@ -10,7 +10,7 @@
       <form action="/create-activity/{{trip.trip_id}}", method="POST"> 
         {% for business in data.businesses %}
         <div class="business">
-          <h3>{{business.name}} {{business.rating}}</h3>
+          <h3>{{business.name}}</h3>
 
           <div class="image">
             <img src="{{business.image_url}}" width="500px" height="500px">
@@ -23,14 +23,14 @@
             {{business.location.zip_code}}">
         </div>
         {% endfor %}   
-        <button type="submit">Submit</button>
+        <button type="submit" class="btn btn-light">Submit</button>
       </form>    
 </div>
 </div>
 
 
 <div class="col">
-<div class="result"></div>
+<div class="result sticky-top"></div>
 </div>
 
 </div>

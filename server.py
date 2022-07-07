@@ -181,7 +181,7 @@ def show_info():
 
     return jsonify(data)
 
-
+# --- route for call to OpenWeather API --- #
 @app.route('/api/open-weather/<trip_id>')
 def show_weather(trip_id):
     """ Makes a call to OpenWeather API to display the weather. """
@@ -234,7 +234,7 @@ def get_airport_code(city):
 
     airport_file.close()
     return iata_code """
-
+# --- route to create activity --- #
 @app.route('/create-activity/<trip_id>', methods=['POST'])
 def create_activity(trip_id):
     """ Create an activity for a trip. """
@@ -300,6 +300,7 @@ def main_marker_info():
         
     return jsonify(coords)
 
+# --- routes for calendar creation and update --- #
 @app.route('/calendar/<trip_id>')
 def view_calendar(trip_id):
     """ View calendar of events for trip. """
@@ -347,6 +348,7 @@ def calendar_info(trip_id):
     }
     return jsonify(data)
 
+# --- route to create note --- #
 @app.route('/submit_note/<trip_id>', methods=['POST'])
 def add_note(trip_id):
     """ Add a note to the trip. """
@@ -362,6 +364,7 @@ def add_note(trip_id):
 
     return redirect(f'/trip/{trip_id}')
 
+# --- routes for photo upload and call to Cloudinary API --- #
 @app.route('/photos/<trip_id>')
 def show_photo_page(trip_id):
     """ Display photo page. """
@@ -388,6 +391,7 @@ def upload_photo(trip_id):
 
     return redirect(f'/photos/{trip_id}')
 
+# --- route to send trip list to react component --- #
 @app.route('/trip-info')
 def get_trips():
     """ Get JSON data for trips. """
