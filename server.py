@@ -169,6 +169,19 @@ def show_custom_activities(trip_id):
 
     return render_template('activities.html', data=data, trip=trip)
 
+@app.route('/show-business-info')
+def show_info():
+    business_id = request.args.get('business')
+    print(business_id)
+    headers = {'Authorization': 'Bearer %s' % YELP_API_KEY}
+
+    res = requests.get(f'https://api.yelp.com/v3/businesses/{business_id}', headers=headers)
+    data = res.json()
+    pp(data)
+
+    return jsonify(data)
+
+
 @app.route('/api/open-weather/<trip_id>')
 def show_weather(trip_id):
     """ Makes a call to OpenWeather API to display the weather. """
