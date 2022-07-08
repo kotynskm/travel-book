@@ -12,8 +12,9 @@
 
 
 {% block body %}
+<h1>Trip Calendar</h1>
 <form action="/update_calendar/{{ trip.trip_id }}", method="POST">
-<h3>Choose the activity to schedule</h3>
+<h4>Choose the activity to schedule</h4>
 {% if not activities %}
 <p>No activities chosen yet.</p>
 {% endif %}
@@ -23,7 +24,7 @@
 {% endfor %}
 </select>
 
-<h3>Choose the day to schedule</h3>
+<h4>Choose the day to schedule</h4>
 <select name="day" id="day">
 {% for day in days %}
 <option value="{{ day }}">{{ day.strftime('%m-%d-%Y') }}</option>

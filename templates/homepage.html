@@ -15,17 +15,17 @@
             <input type="date" name="start" id="start"></br>
             <label for="end-date">Enter an end date</label><br>
             <input type="date" name="end" id="end"><br>
-            <button class="btn btn btn-outline-info" type="submit">Submit</button>
+            <button class="btn btn-light" type="submit">Submit</button>
         </form>
         </div>
    
         <div class="col">
-            <h1>Current trips planned</h1>
+            <h1>Trips planned</h1>
             <div id="root"></div>
         </div>
 
         <div class="col">
-            <h1>Current invited trips</h1>
+            <h1>Invited trips</h1>
             <ul>
                 {% if not user.invited_trips %}
                 <li>No invited trips yet.</li>
@@ -33,7 +33,7 @@
                 {% for trip in user.invited_trips %}
                 <form action="/invited-trip-details/{{ trip.trip_id }}">
                 <li>{{trip.trip_name}}
-                    <button type="submit" class="btn btn-outline-info">View Details</button>
+                    <button type="submit" class="btn btn-light">View Details</button>
                 </li>
                 </form>
                 {% endfor %}

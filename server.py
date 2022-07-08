@@ -172,12 +172,10 @@ def show_custom_activities(trip_id):
 @app.route('/show-business-info')
 def show_info():
     business_id = request.args.get('business')
-    print(business_id)
     headers = {'Authorization': 'Bearer %s' % YELP_API_KEY}
 
     res = requests.get(f'https://api.yelp.com/v3/businesses/{business_id}', headers=headers)
     data = res.json()
-    pp(data)
 
     return jsonify(data)
 
@@ -436,7 +434,36 @@ def show_invited_trip_details(trip_id):
 
     return render_template('invited_trip.html', trip=trip)
 
-# --- routes to DELETE items from trip ---
+# --- routes to DELETE trips, notes, activities ---
+@app.route('/delete_trip/<trip_id>')
+def delete_trip(trip_id):
+    """ Delete a trip. """
+    
+    trip = Trip.get_by_id(trip_id)
+
+    # get trip activities and notes and delete them
+    notes = trip.notes
+    activities = trip.activities
+    invited = trip.invited_users
+
+    for note in notes:
+        db.session.delete(note)
+        db.session.commit()
+
+    for activity in activities:
+        db.session.delete(activity)
+        db.session.commit()
+
+    for invitee in invited:
+        db.session.delete(invitee)
+        db.session.commit()
+
+    # delete the trip
+    db.session.delete(trip)
+    db.session.commit()
+
+    return "Trip deleted"
+
 @app.route('/delete_note/<trip_id>', methods=['POST'])
 def delete_note(trip_id):
     """ Delete a note from trip. """

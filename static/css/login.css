@@ -35,6 +35,8 @@ body, html {
     background-color: white;
   }
 
+  .btn-light
+
   .login-text {
     text-align: center;
   }
@@ -59,6 +61,11 @@ body, html {
     background-color: rgba(250, 246, 246, 0.79);
   }
 
+  .trip-btn {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+
   #category-search {
     width: 160px;
   }
@@ -78,6 +85,7 @@ body, html {
   img {
     height: 400px;
     width: 400px;
+    border-radius: 5px;
   }
   .image {
     height: 300px;
@@ -94,7 +102,6 @@ body, html {
 
   .hover {
     background-color: white;
-    display: inline-block;
 
 }
   .hover:hover {
@@ -115,8 +122,6 @@ span {
   font-family: cursive;
 }
 
-
-
 .col-one {
   display: flex;
   justify-content: center;
@@ -133,6 +138,21 @@ span {
   justify-content: center;
   height: 100%;
   width: 100%;
+}
+/* Container holding the image and the text */
+.trip-container {
+  position: relative;
+  text-align: center;
+  color: white;
+  
+}
+/* Centered text */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+ 
 }
 
   /* h3 {
