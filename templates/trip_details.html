@@ -3,8 +3,8 @@
 
 {% block body %}
 <div class="container">
-<div class="trip-details">
-<h1>Your trip {{ trip.trip_name }} to {{ trip.city }}</h1>
+<div class="trip-details-title">
+<h1>Your trip <span>{{ trip.trip_name }}</span> to {{ trip.city }}</h1>
 <h3>Trip date {{ trip.start_date.strftime('%m-%d-%Y') }} to {{ trip.end_date.strftime('%m-%d-%Y') }}</h3>
 <!-- Flash messages -->
 <div class="flash_msg">
@@ -89,12 +89,12 @@
 
 </div>
 
-
-
 <hr>
 
-<div class="current_activities">
-<h1>Current Activities</h1>
+<div class="row justify-content-between details">
+
+<div class="col">
+<h3>Current Activities</h3>
 <form action="/delete_activity/{{ trip.trip_id }}" method="POST">
 <ul>
     {% if not trip.activities %}
@@ -102,16 +102,18 @@
     {% endif %}
     {% for activity in trip.activities %}
     {% if activity.date == None %}
-    <li>{{ activity.name }}: No date selected yet. <button type="submit" class="btn btn-outline-info" name="activity-id" value="{{activity.activity_id}}">Delete</li>
+    <li>{{ activity.name }} - No date yet. <button type="submit" class="btn btn-outline-info" name="activity-id" value="{{activity.activity_id}}">X</li>
     {% else %}
-    <li>{{ activity.name }}: Scheduled on {{ activity.date.strftime('%m-%d-%Y') }} <button type="submit" class="btn btn-outline-info" name="activity-id" value="{{ activity.activity_id }}">Delete</li>
+    <li>{{ activity.name }} - {{ activity.date.strftime('%m-%d-%Y') }} <button type="submit" class="btn btn-outline-info" name="activity-id" value="{{ activity.activity_id }}">X</li>
     {% endif %}
     {% endfor %}
 </ul>
 </form>
+</div>
 
-<div class="current_notes">
-<h1>My Notes</h1>
+
+<div class="col">
+<h3>Trip Notes</h3>
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Add a note
@@ -120,21 +122,23 @@
 <form action="/delete_note/{{ trip.trip_id }}" method="POST">
 <ul>
   {% for note in trip.notes %}
-  <li>{{note.note}}<button type="submit" name="note-id" value="{{ note.note_id }}">Delete</li>
+  <li>{{note.note}} <button type="submit" class="btn btn-outline-info" name="note-id" value="{{ note.note_id }}">X</li>
   {% endfor %}
 </ul>
 </form>
 </div>
 
-<div class="add-friends">
-<h1>Add Friends</h1>
+<div class="col">
+<h3>Add Friends</h3>
 <form action="/add-friend/{{ trip.trip_id }}", method="POST">
   <label for="friend-fname">Enter your friend's name:</label><br>
   <input type="text" id="friend-fname" name="friend-fname" placeholder="Search"><br>
   <button type="submit" class="btn btn-outline-info">Submit</button>
 </form>
- 
-  <h1>Current Invited Friends</h1>
+</div>
+
+<div class="col">
+  <h3>Current Invited Friends</h3>
   <ul>
     {% if not trip.invited_users %}
     <li>No friends invited to any trips yet.</li>
@@ -144,7 +148,9 @@
     {% endfor %}
   </ul>
 </div>
+
 </div>
+
 
 
   <!-- Modal -->
@@ -174,8 +180,12 @@
 
 </div>
 </div>
+
+<hr>
 <!-- Google map -->
 <div id="map"></div>
+
+
 <script src="/static/js/maps.js"></script>
 <script async
     src="https://maps.googleapis.com/maps/api/js?key={{MAPS_API_KEY}}&callback=initMap">

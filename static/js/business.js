@@ -1,3 +1,5 @@
+
+
 // select all buttons and result div where data will be displayed
 const buttons = document.querySelectorAll('#business-button');
 const result = document.querySelector('.result')
@@ -20,14 +22,37 @@ for(const button of buttons){
     })
 };
 
-
 // function to retrieve hours
 function getHours(data) {
+    // get list of hours from data
     const hoursList = data.hours[0].open
     const resultList = [];
-    const string = ""
+
     for(const day of hoursList){
-        const sched =`<div>Day: ${day.day} - Start: ${day.start}, End: ${day.end}
+        // convert day number to actual weekday
+        switch (day.day) {
+            case 0:
+                dayOfWeek = "Sunday";
+                break;
+            case 1:
+                dayOfWeek = "Monday";
+                break;
+            case 2:
+                dayOfWeek = "Tuesday";
+                break;
+            case 3:
+                dayOfWeek = "Wednesday";
+                break;
+            case 4:
+                dayOfWeek = "Thursday";
+                break;
+            case 5:
+                dayOfWeek = "Friday";
+                break;
+            case 6:
+                dayOfWeek = "Saturday";
+        }
+        const sched =`<div>${dayOfWeek} - Open: ${day.start} | Close: ${day.end}
         </div>`;
         resultList.push(
            sched 
@@ -36,23 +61,18 @@ function getHours(data) {
     return resultList.join("");
   }
 
-function printHello(){
-    return "hello";
-}
 // function to store data from API call then format into template literal
 function construct(data){
-    const hoursList = data.hours[0].open
-    // console.log(hoursList)
-    for(const day of hoursList){
-        // console.log(day.start)
-    }
-    
+
     const name = data.name
     const phone = data.display_phone
     const location = data.location.display_address
     const firstImageURL = data.photos[1]
     const secondImageURL = data.photos[2]
-    const price = data.price
+    let price = data.price
+    if(price == undefined){
+        price = "No price listed."
+    }
     const rating = data.rating
     const reviewCount = data.review_count
     const category = data.categories[0].title
@@ -63,3 +83,5 @@ function construct(data){
     </h5><br><h5>Photos: </h5><br><img src="${firstImageURL}" width="300" height="300"> <img src="${secondImageURL}" width="300" height="300"></div>`
 
 }
+
+

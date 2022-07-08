@@ -101,12 +101,38 @@ body, html {
     opacity: .8;
 }
 
-.trip-details {
-  border: solid 5px rgb(238, 237, 237);
+.trip-details-title {
+  border: solid 5px rgb(246, 246, 246);
+  background-color: rgb(246, 246, 246);
   border-radius: 5px;
+  box-shadow: 5px 10px #b5b5b5;
   text-align: center;
-  margin: 10px;
+  margin: 20px;
   padding: 10px;
+}
+
+span {
+  font-family: cursive;
+}
+
+
+
+.col-one {
+  display: flex;
+  justify-content: center;
+}
+
+.carousel-item {
+  height: 32rem;
+  background: rgba(240, 240, 240, 0.553);
+}
+ 
+.carousel-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
 }
 
   /* h3 {
