@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+<h1>Weather for {{ trip.city }}</h1>
+
+<div>
+    <h2>Current Weather</h2>
+    <ul>
+        <li>Overview: {{data.current.weather[0].main}}</li>
+        <li>Temperature: {{data.current.temp}}</li>
+        <li>Feels like: {{data.current.feels_like}}</li>
+        <li>Humidity: {{data.current.humidity}}</li>
+        <li>Clouds: {{data.current.clouds}}</li>
+        <li>Wind-speed: {{data.current.wind_speed}}</li>
+    </ul>
+
+    <h2>Daily Weather (Next 8 Days)</h2>
+    <ol>
+        {% for day in data.daily %}
+        <li>
+            <img src="http://openweathermap.org/img/wn/{{ day.weather[0].icon }}@4x.png">
+            {{day.weather[0].main}}
+            Daytime Temperature: {{day.temp.day}}
+            Nighttime Temperature: {{day.temp.night}}
+        </li>
+        {% endfor %}
+    </ol>
+</div>
+
+{% endblock %}

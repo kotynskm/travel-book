@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+<h1>{{ trip.user.fname }} {{ trip.user.lname }} invited you to their {{ trip.trip_name }}!</h1>
+<h1>Current Activities</h1>
+<ul>
+    {% if not trip.activities %}
+    <li>No activities chosen yet.</li>
+    {% endif %}
+    {% for activity in trip.activities %}
+    <li>{{ activity.name }}: {{ activity.date }}</li>
+    {% endfor %}
+</ul>
+<h1>Trip Notes</h1>
+<ul>
+    {% if not trip.notes %}
+    <li>No notes yet.</li>
+    {% endif %}
+    {% for note in trip.notes %}
+    <li>{{ note.note }}</li>
+    {% endfor %}
+</ul>
+<h1>Trip Photos</h1>
+<ul>
+    {% if not trip.photos %}
+    <li>No photos yet.</li>
+    {% endif %}
+    {% for photo in trip.photos %}
+    <li><img src="{{ photo.photo }}"></li>
+    {% endfor %}
+</ul>
+
+
+
+{% endblock %}
