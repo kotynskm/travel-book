@@ -3,6 +3,7 @@ from unicodedata import name
 from flask_sqlalchemy import SQLAlchemy
 from datetime import date
 from sqlalchemy import nullslast
+from passlib.hash import argon2
 
 db = SQLAlchemy()
 
@@ -187,11 +188,11 @@ def example_data():
     Trip.query.delete()
 
     # add some sample users and trips
-    user1 = User(fname = 'Linda', lname = 'Lane', email = 'one@gmail.com', password = 'abc')
-    user2 = User(fname = 'Stacy', lname = 'Smith', email = 'two@gmail.com', password = 'onetwo')
+    user1 = User(fname = 'Linda', lname = 'Lane', email = 'one@gmail.com', password = argon2.hash('abc'))
+    user2 = User(fname = 'Stacy', lname = 'Smith', email = 'two@gmail.com', password = argon2.hash('onetwo'))
 
-    trip1 = Trip(trip_name = 'pnw hike trip', city = 'Seattle, WA')
-    trip2 = Trip(trip_name = 'beach trip', city = 'San Diego, CA')
+    trip1 = Trip(trip_name = 'pnw hike trip', city = 'Seattle, WA', start_date = '6/16/22', end_date = '6/18/22')
+    trip2 = Trip(trip_name = 'beach trip', city = 'San Diego, CA', start_date = '6/16/22', end_date = '6/18/22')
 
     db.session.add_all([user1, user2, trip1, trip2])
     db.session.commit()
