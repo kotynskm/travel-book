@@ -179,6 +179,22 @@ class Invitation(db.Model):
         return f'<Invite ID {self.invitation_id} Trip {self.trip_id} User {self.user_id}'
 
 
+def example_data():
+    """ Create sample data for testing. """
+
+    # in case this is run multiple times, clear existing data
+    User.query.delete()
+    Trip.query.delete()
+
+    # add some sample users and trips
+    user1 = User(fname = 'Linda', lname = 'Lane', email = 'one@gmail.com', password = 'abc')
+    user2 = User(fname = 'Stacy', lname = 'Smith', email = 'two@gmail.com', password = 'onetwo')
+
+    trip1 = Trip(trip_name = 'pnw hike trip', city = 'Seattle, WA')
+    trip2 = Trip(trip_name = 'beach trip', city = 'San Diego, CA')
+
+    db.session.add_all([user1, user2, trip1, trip2])
+    db.session.commit()
 
 
 
