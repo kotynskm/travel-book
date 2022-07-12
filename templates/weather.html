@@ -2,30 +2,43 @@
 
 
 {% block body %}
+<div class="container">
 <h1>Weather for {{ trip.city }}</h1>
+<br>
 
-<div>
+<div class="row">
+    <div class="col">
     <h2>Current Weather</h2>
     <ul>
         <li>Overview: {{data.current.weather[0].main}}</li>
         <li>Temperature: {{data.current.temp}}</li>
         <li>Feels like: {{data.current.feels_like}}</li>
-        <li>Humidity: {{data.current.humidity}}</li>
-        <li>Clouds: {{data.current.clouds}}</li>
-        <li>Wind-speed: {{data.current.wind_speed}}</li>
+        <li>Humidity: {{data.current.humidity}}%</li>
+        <li>Clouds: {{data.current.clouds}}%</li>
+        <li>Wind-speed: {{data.current.wind_speed}}m/s</li>
     </ul>
+    </div>
 
     <h2>Daily Weather (Next 8 Days)</h2>
-    <ol>
+    <ul>
         {% for day in data.daily %}
         <li>
+            <div class="weather-container">
             <img src="http://openweathermap.org/img/wn/{{ day.weather[0].icon }}@4x.png">
-            {{day.weather[0].main}}
-            Daytime Temperature: {{day.temp.day}}
-            Nighttime Temperature: {{day.temp.night}}
+            <ul>
+            <li>Overview: {{day.weather[0].main}}</li>
+            <li>Daytime Temperature: {{day.temp.day}}</li>
+            <li>Nighttime Temperature: {{day.temp.night}}</li>
+            <li>Humidity: {{day.humidity}}%</li>
+            <li>Clouds: {{day.clouds}}%</li>
+            <li>Wind-speed: {{day.wind_speed}}m/s</li>
+            </ul>
+            </div>
+            <br>
         </li>
         {% endfor %}
-    </ol>
+    </ul>
+</div>
 </div>
 
 {% endblock %}

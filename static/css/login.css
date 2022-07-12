@@ -119,8 +119,8 @@ body, html {
 .trip-details-title {
   background-color: rgb(255, 255, 255);
   background-image: url("../img/crossword.png");
-  border-radius: 10px;
-  box-shadow: 2px 2px #e7e7e7;
+  border-radius: 5px;
+  box-shadow: 0 8px 8px -4px lightblue;
   text-align: center;
   margin: 20px;
   padding: 10px;
@@ -147,7 +147,10 @@ span {
   height: 100%;
   width: 100%;
 }
-
+.carousel-inner img {
+  height: 600px;
+  width: 600px;
+}
 
 /* Container holding the image and the text on homepage */
 .trip-container {
@@ -171,6 +174,14 @@ span {
   width: 700px;
   border: 5px white solid;
   border-radius: 10px;
+}
+
+.weather-container {
+  border: white 3px solid;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 
