@@ -1,6 +1,7 @@
 body, html {
     height: 100%;
     font-family: 'Dosis', sans-serif;
+    background-color: #fbe4d7;
   }
   
   .bg {
@@ -42,9 +43,6 @@ body, html {
   .btn-light:hover {
     background-color: hsl(194, 62%, 87%);
   }
-  .login-button:hover {
-    background-color: hsl(194, 62%, 87%);
-  }
  
   input[type=text] {
     padding:10px;
@@ -60,6 +58,10 @@ body, html {
     border-radius: 5px;
     box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
     background-color: rgba(250, 246, 246, 0.79);
+  }
+
+  ul {
+    list-style: none;
   }
 
   .trip-btn {
@@ -86,11 +88,13 @@ body, html {
     background-color: white;
   }
 
+
   img {
-    height: 400px;
-    width: 400px;
+    height: 300px;
+    width: 300px;
     border-radius: 5px;
   }
+
   .image {
     height: 300px;
     width: 300px;
@@ -113,10 +117,10 @@ body, html {
 }
 
 .trip-details-title {
-  border: solid 5px rgb(246, 246, 246);
-  background-color: rgb(246, 246, 246);
-  border-radius: 5px;
-  box-shadow: 5px 10px #b5b5b5;
+  background-color: rgb(255, 255, 255);
+  background-image: url("../img/crossword.png");
+  border-radius: 10px;
+  box-shadow: 2px 2px #e7e7e7;
   text-align: center;
   margin: 20px;
   padding: 10px;
@@ -133,7 +137,7 @@ span {
 
 .carousel-item {
   height: 32rem;
-  background: rgba(240, 240, 240, 0.553);
+  background: rgba(202, 202, 202, 0.622);
 }
  
 .carousel-image {
@@ -143,21 +147,32 @@ span {
   height: 100%;
   width: 100%;
 }
-/* Container holding the image and the text */
+
+
+/* Container holding the image and the text on homepage */
 .trip-container {
   position: relative;
   text-align: center;
   color: white;
   
 }
-/* Centered text */
+/* Centered text in trip container */
 .centered {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
- 
+  background-color: rgba(0, 0, 0, 0.503);
+  padding: 10px;
 }
+
+.friends-image img {
+  height: 500px;
+  width: 700px;
+  border: 5px white solid;
+  border-radius: 10px;
+}
+
 
   /* h3 {
     text-align: center;

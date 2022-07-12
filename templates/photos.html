@@ -1,14 +1,20 @@
 {% extends 'base.html' %}
 {% block body %}
 
+<div class="container photo-container">
 
+<div class="row">
 <h1>Photos for {{trip.trip_name}}</h1>
 <h2>Add a photo</h2>
 <form action="/upload-photo/{{ trip.trip_id }}" method="POST" enctype="multipart/form-data">
     <input type="file" name="my-file">
-    <button type="submit">Upload photo</button>
+    <button class="btn btn-light" type="submit">Upload photo</button>
 </form>
+</div>
+<br>
 
+{% if photos %}
+<div class="carousel-container">
 <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
     <div class="carousel-indicators">
       <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -33,7 +39,9 @@
       <span class="visually-hidden">Next</span>
     </button>
   </div>
-
+  </div>
+</div>
+{% endif %}
 
 <!-- JavaScript Bundle with Popper -->
 

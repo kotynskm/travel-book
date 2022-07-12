@@ -2,8 +2,11 @@
 
 
 {% block body %}
-<h1>{{ trip.user.fname }} {{ trip.user.lname }} invited you to their {{ trip.trip_name }}!</h1>
-<h1>Current Activities</h1>
+<div class="container">
+<div class="row">
+<div class="col">
+<h1>{{ trip.user.fname }} {{ trip.user.lname }} invited you to <span>{{ trip.trip_name }}!</span></h1>
+<h2>Current Activities</h2>
 <ul>
     {% if not trip.activities %}
     <li>No activities chosen yet.</li>
@@ -12,7 +15,7 @@
     <li>{{ activity.name }}: {{ activity.date }}</li>
     {% endfor %}
 </ul>
-<h1>Trip Notes</h1>
+<h2>Trip Notes</h2>
 <ul>
     {% if not trip.notes %}
     <li>No notes yet.</li>
@@ -21,7 +24,7 @@
     <li>{{ note.note }}</li>
     {% endfor %}
 </ul>
-<h1>Trip Photos</h1>
+<h2>Trip Photos</h2>
 <ul>
     {% if not trip.photos %}
     <li>No photos yet.</li>
@@ -30,7 +33,13 @@
     <li><img src="{{ photo.photo }}"></li>
     {% endfor %}
 </ul>
+</div>
 
+<div class="col friends-image">
+    <img src="/static/img/oveth-martinez-5y6SdhXQ92A-unsplash.jpg">
+</div>
+</div>
+</div>
 
 
 {% endblock %}
