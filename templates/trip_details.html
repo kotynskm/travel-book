@@ -23,8 +23,8 @@
   <img src="/static/img/icon images/wine.jpg" class="img-thumbnail" alt="a table with two bowls of food and glasses of wine">
   <div class="card-body">
     <h5 class="card-title">Restaurants</h5>
-    <p class="card-text">View top rated restaurants.</p>
-    <a href="/api/restaurants/{{ trip.trip_id }}" class="btn btn-outline-info card">Click here!</a>
+    <p class="card-text">Select top rated restaurants for your trip.<br></p>
+    <a href="/api/restaurants/{{ trip.trip_id }}" class="btn btn-light card">Click here!</a>
   </div>
 </div>
 </div>
@@ -34,8 +34,8 @@
   <img src="/static/img/icon images/balloons.jpg" class="img-thumbnail" alt="a table with two bowls of food and glasses of wine">
   <div class="card-body">
     <h5 class="card-title">Activities</h5>
-    <p class="card-text">View top rated activities.</p>
-    <a href="/api/activities/{{ trip.trip_id }}" class="btn btn-outline-info card">Click here!</a>
+    <p class="card-text">Select top rated activities for your trip.</p>
+    <a href="/api/activities/{{ trip.trip_id }}" class="btn btn-light card">Click here!</a>
   </div>
 </div>
 </div>
@@ -48,7 +48,7 @@
     Enter a category:
     <form action="/api/search/{{ trip.trip_id }}">
     <input type="text" id="category-search" name="activity-category" placeholder="Search">
-    <button class="btn btn-outline-info card-btn" type="submit">Click here!</button>
+    <button class="btn btn-light card-btn" type="submit">Click here!</button>
     </form>
   </div>
 </div>
@@ -60,7 +60,7 @@
     <div class="card-body">
       <h5 class="card-title">Calendar</h5>
       <p class="card-text">View your calendar events.</p>
-      <a href="/calendar/{{ trip.trip_id }}" class="btn btn-outline-info card">Click here!</a>
+      <a href="/calendar/{{ trip.trip_id }}" class="btn btn-light card">Click here!</a>
     </div>
   </div>
   </div>
@@ -70,8 +70,8 @@
       <img src="/static/img/icon images/camera.jpg" class="img-thumbnail" alt="a table with two bowls of food and glasses of wine">
       <div class="card-body">
         <h5 class="card-title">Photos</h5>
-        <p class="card-text">Go to your photo upload.</p>
-        <a href="/photos/{{ trip.trip_id }}" class="btn btn-outline-info card">Click here!</a>
+        <p class="card-text">Go to your photo upload page.</p>
+        <a href="/photos/{{ trip.trip_id }}" class="btn btn-light card">Click here!</a>
       </div>
     </div>
     </div>
@@ -81,8 +81,8 @@
         <img src="/static/img/icon images/rainbow.jpg" class="img-thumbnail" alt="a table with two bowls of food and glasses of wine">
         <div class="card-body">
           <h5 class="card-title">Weather</h5>
-          <p class="card-text">View upcoming weather.</p>
-          <a href="/api/open-weather/{{ trip.trip_id }}" class="btn btn-outline-info card">Click here!</a>
+          <p class="card-text">View upcoming weather in trip city.</p>
+          <a href="/api/open-weather/{{ trip.trip_id }}" class="btn btn-light card">Click here!</a>
         </div>
       </div>
       </div>
@@ -102,9 +102,9 @@
     {% endif %}
     {% for activity in trip.activities %}
     {% if activity.date == None %}
-    <li>{{ activity.name }} - No date yet. <button type="submit" class="btn btn-outline-info" name="activity-id" value="{{activity.activity_id}}">X</li>
+    <li>{{ activity.name }} - No date yet. <button type="submit" class="btn btn-light" name="activity-id" value="{{activity.activity_id}}">X</li>
     {% else %}
-    <li>{{ activity.name }} - {{ activity.date.strftime('%m-%d-%Y') }} <button type="submit" class="btn btn-outline-info" name="activity-id" value="{{ activity.activity_id }}">X</li>
+    <li>{{ activity.name }} - {{ activity.date.strftime('%m-%d-%Y') }} <button type="submit" class="btn btn-light" name="activity-id" value="{{ activity.activity_id }}">X</li>
     {% endif %}
     {% endfor %}
 </ul>
@@ -115,14 +115,14 @@
 <div class="col">
 <h3>Trip Notes</h3>
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-outline-info" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Add a note
 </button>
 
 <form action="/delete_note/{{ trip.trip_id }}" method="POST">
 <ul>
   {% for note in trip.notes %}
-  <li>{{note.note}} <button type="submit" class="btn btn-outline-info" name="note-id" value="{{ note.note_id }}">X</li>
+  <li>{{note.note}} <button type="submit" class="btn btn-light" name="note-id" value="{{ note.note_id }}">X</li>
   {% endfor %}
 </ul>
 </form>
@@ -133,7 +133,7 @@
 <form action="/add-friend/{{ trip.trip_id }}", method="POST">
   <label for="friend-fname">Enter your friend's name:</label><br>
   <input type="text" id="friend-fname" name="friend-fname" placeholder="Search"><br>
-  <button type="submit" class="btn btn-outline-info">Submit</button>
+  <button type="submit" class="btn btn-light">Submit</button>
 </form>
 </div>
 
@@ -171,7 +171,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-info">Submit</button>
+          <button type="submit" class="btn btn-light">Submit</button>
         </div>
       </form>
       </div>
