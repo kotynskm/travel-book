@@ -191,6 +191,14 @@ span {
   background-color: white;
 }
 
+.outer-container{
+  width:45%;
+  height:500PX;
+  FLOAT: left;
+  margin-left: 5%;
+  padding: 1%;
+  overflow: scroll;
+  }
 
 
   /* h3 {
