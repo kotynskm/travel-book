@@ -12,6 +12,8 @@
 
 
 {% block body %}
+<div class="container">
+<div class="row">
 <h1>Trip Calendar</h1>
 <form action="/update_calendar/{{ trip.trip_id }}", method="POST">
 <h4>Choose the activity to schedule</h4>
@@ -29,13 +31,15 @@
 {% for day in days %}
 <option value="{{ day }}">{{ day.strftime('%m-%d-%Y') }}</option>
 {% endfor %}
-</select><br>
+</select><br><br>
 <button type="Submit" class="btn btn-light">Submit</button>
 </form>
+</div>
+<br>
 
 <div id="calendar"></div>
 <script src="/static/js/calendar.js"></script>
-
+</div>
 
 
 

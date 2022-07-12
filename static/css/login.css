@@ -182,7 +182,15 @@ span {
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 300px;
+  width: 500px;
+  
 }
+
+#calendar {
+  background-color: white;
+}
+
 
 
   /* h3 {
