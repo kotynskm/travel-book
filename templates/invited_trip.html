@@ -5,7 +5,10 @@
 <div class="container">
 <div class="row">
 <div class="col">
-<h1>{{ trip.user.fname }} {{ trip.user.lname }} invited you to <span>{{ trip.trip_name }}!</span></h1>
+<h1 class="invited-title">{{ trip.user.fname }} {{ trip.user.lname }} invited you to <span>{{ trip.trip_name }}!</span></h1>
+<br>
+
+<div class="invite-container">
 <h2>Current Activities</h2>
 <ul>
     {% if not trip.activities %}
@@ -33,6 +36,7 @@
     <li><img src="{{ photo.photo }}"></li>
     {% endfor %}
 </ul>
+</div>
 </div>
 
 <div class="col friends-image">

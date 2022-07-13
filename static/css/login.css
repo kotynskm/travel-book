@@ -1,4 +1,4 @@
-body, html {
+  body, html {
     height: 100%;
     font-family: 'Dosis', sans-serif;
     background-color: #fbe4d7;
@@ -89,7 +89,6 @@ body, html {
     border-radius: 10px;
   }
 
-
   img {
     height: 300px;
     width: 300px;
@@ -109,122 +108,122 @@ body, html {
     text-align: center;
   }
 
-  .hover {
-    background-color: white;
-
-}
-  .hover:hover {
-    opacity: .8;
-}
-
-.trip-details-title {
-  background-color: rgb(255, 255, 255);
-  background-image: url("../img/crossword.png");
-  border-radius: 5px;
-  box-shadow: 0 8px 8px -4px lightblue;
-  text-align: center;
-  margin: 20px;
-  padding: 10px;
-}
-
-span {
-  font-family: 'Satisfy', cursive;
-}
-
-.col-one {
-  display: flex;
-  justify-content: center;
-}
-
-.carousel-item {
-  height: 32rem;
-  background: #add8e685;
-  border-radius: 10px;
-  margin-bottom: 10px;
-}
- 
-.carousel-image {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  width: 100%;
-}
-.carousel-inner img {
-  height: 500px;
-  width: 500px;
-}
-
-/* Container holding the image and the text on homepage */
-.trip-container {
-  position: relative;
-  text-align: center;
-  color: white;
-  
-}
-/* Centered text in trip container */
-.centered {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: rgba(0, 0, 0, 0.503);
-  padding: 10px;
-}
-
-.friends-image img {
-  height: 500px;
-  width: 700px;
-  border: 5px white solid;
-  border-radius: 10px;
-}
-
-.weather-container {
-  border: white 3px solid;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 300px;
-  width: 500px;
-  
-}
-
-.current-container {
-  border: white 3px solid;
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 300px;
-  width: 500px;
-  
-}
-
-#calendar {
-  background-color: white;
-}
-
-.outer-container{
-  width:45%;
-  height:500PX;
-  FLOAT: left;
-  margin-left: 5%;
-  padding: 1%;
-  overflow: scroll;
-  }
-
-  .information-box {
-    border: 2px white solid;
-    border-radius: 10px;
+  .trip-details-title {
+    background-color: rgb(255, 255, 255);
+    background-image: url("../img/crossword.png");
+    border-radius: 5px;
+    box-shadow: 0 8px 8px -4px lightblue;
+    text-align: center;
+    margin: 20px;
     padding: 10px;
   }
 
-  .activity-title, .calendar-title, .weather-title, .welcome-title {
-    box-shadow: 0 8px 8px -4px #add8e6;
+  span {
+    font-family: 'Satisfy', cursive;
   }
 
-  .photo-title {
-    box-shadow: 0 8px 8px -4px lightblue;
-    margin-bottom: 20px;
+  .col-one {
+    display: flex;
+    justify-content: center;
   }
+
+  .carousel-item {
+    height: 32rem;
+    background: #add8e685;
+    border-radius: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .carousel-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+  }
+  .carousel-inner img {
+    height: 500px;
+    width: 500px;
+  }
+
+  /* Container holding the image and the text on homepage */
+  .trip-container {
+    position: relative;
+    text-align: center;
+    color: white;
+    margin-right: 100px;
+    
+  }
+  /* Centered text in trip container */
+  .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.503);
+    padding: 5px;
+  }
+
+  .friends-image img {
+    height: 500px;
+    width: 700px;
+    border: 2px white solid;
+    border-radius: 10px;
+  }
+
+  .weather-container {
+    border: white 3px solid;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    width: 500px;
+    
+  }
+
+  .current-container {
+    border: white 3px solid;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    width: 500px;
+    
+  }
+
+  #calendar {
+    background-color: white;
+  }
+
+  .outer-container{
+    width:45%;
+    height:500PX;
+    FLOAT: left;
+    margin-left: 5%;
+    padding: 1%;
+    overflow: scroll;
+    }
+
+    .information-box, .invite-container{
+      border: 2px white solid;
+      border-radius: 10px;
+      padding: 10px;
+    }
+
+    .activity-title, .calendar-title, .weather-title, .welcome-title, .invited-title {
+      box-shadow: 0 8px 8px -4px #add8e6;
+    }
+
+    .photo-title {
+      box-shadow: 0 8px 8px -4px lightblue;
+      margin-bottom: 20px;
+    }
+
+    .trip-plan {
+      margin-left: 30px;
+    }
+
+    
+
