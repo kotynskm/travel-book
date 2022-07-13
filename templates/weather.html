@@ -7,8 +7,11 @@
 <br>
 
 <div class="row">
+
     <div class="col">
     <h2>Current Weather</h2>
+    <div class="current-container">
+    <img src="http://openweathermap.org/img/wn/{{ data.current.weather[0].icon }}@4x.png">
     <ul>
         <li>Overview: {{data.current.weather[0].main}}</li>
         <li>Temperature: {{data.current.temp}}</li>
@@ -18,12 +21,12 @@
         <li>Wind-speed: {{data.current.wind_speed}}m/s</li>
     </ul>
     </div>
+    </div>
 
     <div class="outer-container">
     <h2>Daily Weather (Next 8 Days)</h2>
     <ul>
         {% for day in data.daily %}
-        <li>
             <div class="weather-container">
             <img src="http://openweathermap.org/img/wn/{{ day.weather[0].icon }}@4x.png">
             <ul>
@@ -36,7 +39,6 @@
             </ul>
             </div>
             <br>
-        </li>
         {% endfor %}
     </ul>
 </div>

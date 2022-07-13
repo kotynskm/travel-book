@@ -187,6 +187,17 @@ span {
   
 }
 
+.current-container {
+  border: white 3px solid;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  width: 500px;
+  
+}
+
 #calendar {
   background-color: white;
 }
