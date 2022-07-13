@@ -150,7 +150,7 @@ def show_restaurants(trip_id):
     res = requests.get(url,headers=headers,params=params)
     data = res.json()
 
-    return render_template('restaurants.html', data=data, trip=trip)
+    return render_template('activities.html', data=data, trip=trip)
 
 @app.route('/api/search/<trip_id>')
 def show_custom_activities(trip_id):

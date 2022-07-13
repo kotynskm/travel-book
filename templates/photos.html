@@ -4,7 +4,9 @@
 <div class="container photo-container">
 
 <div class="row">
-<h1>Photos for {{trip.trip_name}}</h1>
+  
+<h1 class="photo-title">Photos for {{trip.trip_name}}</h1>
+
 <h2>Add a photo</h2>
 <form action="/upload-photo/{{ trip.trip_id }}" method="POST" enctype="multipart/form-data">
     <input type="file" name="my-file">

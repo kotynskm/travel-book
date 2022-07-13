@@ -14,8 +14,9 @@
 {% block body %}
 <div class="container">
 <div class="row">
-<h1>Trip Calendar</h1>
+<h1 class="calendar-title">Trip Calendar</h1>
 <form action="/update_calendar/{{ trip.trip_id }}", method="POST">
+<br>
 <h4>Choose the activity to schedule</h4>
 {% if not activities %}
 <p>No activities chosen yet.</p>
