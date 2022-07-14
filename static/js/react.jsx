@@ -25,6 +25,7 @@ function Trips(){
 
     for (const trip of trips){
         listOfTrips.push(<li key={trip.name}>
+         
             <div className="trip-container">
 
             <div className="centered">
@@ -37,6 +38,7 @@ function Trips(){
             <a href={`/trip/${trip.trip_id}`}><img src={`../static/img/${trip.url}`}></img></a>
             </div>
             <br></br>
+  
         </li>)
     };
 

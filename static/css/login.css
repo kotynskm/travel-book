@@ -50,8 +50,6 @@
     border-radius: 5px;
     box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
     background-color: rgba(250, 246, 246, 0.79);
-    /* max-width: 300px maybe
-    min-width: */
   }
 
   input[type="date"] {
@@ -143,7 +141,7 @@
 
   .carousel-item {
     height: 32rem;
-    background: #add8e685;
+    background: #ffdbc791;
     border-radius: 10px;
     margin-bottom: 10px;
   }
@@ -177,6 +175,7 @@
     transform: translate(-50%, -50%);
     background-color: rgba(0, 0, 0, 0.503);
     padding: 5px;
+    border-radius: 5px;
   }
 
   .friends-image img {
@@ -253,6 +252,23 @@
   .details {
     margin-left: 100px;
   }
+
+  footer {
+    color: black;
+    background-color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 20px;
+    flex-shrink: 0;
+  }
+
+  .push {
+    height: 280px;
+  }
+
+
+
+
 
     
 

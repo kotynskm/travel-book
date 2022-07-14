@@ -187,10 +187,12 @@ def show_weather(trip_id):
     units = 'imperial'
     geolocator = Nominatim(user_agent="MyApp")
     location = geolocator.geocode(location_city)
+    days = ['Day 1: Monday', 'Day 2: Tuesday', 'Day 3: Wednesday', 'Day 4: Thursday', 'Day 5: Friday',
+    'Day 6: Saturday', 'Day 7: Sunday', 'Day 8: Monday']
 
     res = requests.get(f'https://api.openweathermap.org/data/2.5/onecall?lat={location.latitude}&lon={location.longitude}&units={units}&appid={OPEN_WEATHER_KEY}')
     data = res.json()
-    return render_template('weather.html', data=data, trip=trip)
+    return render_template('weather.html', data=data, trip=trip, days=days)
 
 """ --- routes for call to AviationStack API (function DISABLED, free plan does not allow arrival and depart date params) ---
 @app.route('/api/flights/<trip_id>')
