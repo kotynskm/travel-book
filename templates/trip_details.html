@@ -47,7 +47,7 @@
     <h5 class="card-title">Choose your own</h5>
     Enter a category:
     <form action="/api/search/{{ trip.trip_id }}">
-    <input type="text" id="category-search" name="activity-category" placeholder="Search">
+    <input type="text" id="category-search" name="activity-category" placeholder="Ex: coffee, seafood, etc">
     <button class="btn btn-light card-btn" type="submit">Click here!</button>
     </form>
   </div>
@@ -81,7 +81,7 @@
         <img src="/static/img/icon images/rainbow.jpg" class="img-thumbnail" alt="a table with two bowls of food and glasses of wine">
         <div class="card-body">
           <h5 class="card-title">Weather</h5>
-          <p class="card-text">View upcoming weather in trip city.</p>
+          <p class="card-text">View upcoming weather in {{ trip.city }}.</p>
           <a href="/api/open-weather/{{ trip.trip_id }}" class="btn btn-light card">Click here!</a>
         </div>
       </div>
@@ -91,68 +91,115 @@
 
 <hr>
 
-<div class="row justify-content-between details">
+<div class="row details">
+  <div class="col">
+<p>
+  <button class="btn btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseActivity" aria-expanded="false" aria-controls="collapseWidthExample">
+    View Current Activities
+  </button>
+</p>
 
-<div class="col">
-<h3>Activities</h3>
-<form action="/delete_activity/{{ trip.trip_id }}" method="POST">
-<ul>
-    {% if not trip.activities %}
-    <li>No activities chosen yet. Go to schedule activities to start planning!</li>
-    {% endif %}
-    {% for activity in trip.activities %}
-    {% if activity.date == None %}
-    <li>{{ activity.name }} - No date yet. <button type="submit" class="btn btn-light" name="activity-id" value="{{activity.activity_id}}">X</li>
-    {% else %}
-    <li>{{ activity.name }} - {{ activity.date.strftime('%m-%d-%Y') }} <button type="submit" class="btn btn-light" name="activity-id" value="{{ activity.activity_id }}">X</li>
-    {% endif %}
-    {% endfor %}
-</ul>
-</form>
+<div style="min-height: 120px;">
+  <div class="collapse collapse-horizontal" id="collapseActivity">
+    <div class="card card-body" style="width: 250px;">
+    <form action="/delete_activity/{{ trip.trip_id }}" method="POST">
+      <ul>
+          {% if not trip.activities %}
+          <li>No activities chosen yet. Go to schedule activities to start planning!</li>
+          {% endif %}
+          {% for activity in trip.activities %}
+          {% if activity.date == None %}
+          <li>{{ activity.name }} | No date yet. <button type="submit" class="btn btn-light" name="activity-id" value="{{activity.activity_id}}">X</li>
+          {% else %}
+          <li>{{ activity.name }} | {{ activity.date.strftime('%m-%d-%Y') }} <button type="submit" class="btn btn-light" name="activity-id" value="{{ activity.activity_id }}">X</li>
+          {% endif %}
+          {% endfor %}
+      </ul>
+      </form>
+  </div>
 </div>
-
-
-<div class="col">
-<h3>Trip Notes</h3>
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Add a note
-</button>
-
-<form action="/delete_note/{{ trip.trip_id }}" method="POST">
-<ul>
-  {% for note in trip.notes %}
-  <li>{{note.note}} <button type="submit" class="btn btn-light" name="note-id" value="{{ note.note_id }}">X</li>
-  {% endfor %}
-</ul>
-</form>
+</div>
 </div>
 
 <div class="col">
-<h3>Add Friends</h3>
-<form action="/add-friend/{{ trip.trip_id }}", method="POST">
-  <label for="friend-fname">Enter your friend's name:</label><br>
-  <input type="text" id="friend-fname" name="friend-fname" placeholder="Search"><br><br>
-  <button type="submit" class="btn btn-light">Submit</button>
-</form>
-</div>
+<p>
+  <button class="btn btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseNote" aria-expanded="false" aria-controls="collapseWidthExample">
+    View/Add Trip Notes
+  </button>
+</p>
 
-<div class="col">
-  <h3>Invited Friends</h3>
+<div style="min-height: 120px;">
+  <div class="collapse collapse-horizontal" id="collapseNote">
+    <div class="card card-body" style="width: 250px;">
+      <!-- Button trigger modal -->
+  <button type="button" class="btn btn-light" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Add a note
+  </button>
+
+  <form action="/delete_note/{{ trip.trip_id }}" method="POST">
   <ul>
-    {% if not trip.invited_users %}
-    <li>No friends invited to any trips yet.</li>
-    {% endif %}
-    {% for friend in trip.invited_users %}
-    <li>{{ friend.fname }} {{ friend.lname }}</li>
+    {% for note in trip.notes %}
+    <li>{{note.note}} <button type="submit" class="btn btn-light" name="note-id" value="{{ note.note_id }}">X</li>
     {% endfor %}
   </ul>
+  </form>
+      </div>
+  </div>
 </div>
+
+</div>
+
+
+<div class="col">
+<p>
+  <button class="btn btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFriend" aria-expanded="false" aria-controls="collapseWidthExample">
+    Add Friends to Trip
+  </button>
+</p>
+
+<div style="min-height: 120px;">
+  <div class="collapse collapse-horizontal" id="collapseFriend">
+    <div class="card card-body" style="width: 250px;">
+      <form action="/add-friend/{{ trip.trip_id }}", method="POST">
+        <label for="friend-fname">Enter your friend's name:</label><br>
+        <input type="text" class="friend-input" id="friend-fname" name="friend-fname" placeholder="Search"><br>
+        <button type="submit" class="btn btn-light friend-btn">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+</div>
+
+
+<div class="col">
+<p>
+  <button class="btn btn-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseInvited" aria-expanded="false" aria-controls="collapseWidthExample">
+    View Invited Friends
+  </button>
+</p>
+
+<div style="min-height: 120px;">
+  <div class="collapse collapse-horizontal" id="collapseInvited">
+    <div class="card card-body" style="width: 250px;">
+      <ul>
+        {% if not trip.invited_users %}
+        <li>No friends invited to any trips yet.</li>
+        {% endif %}
+        {% for friend in trip.invited_users %}
+        <li>{{ friend.fname }} {{ friend.lname }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+</div>
+</div>
+
 
 <h1>Activities Map</h1>
-
-</div>
-
 
 
   <!-- Modal -->

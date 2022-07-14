@@ -54,7 +54,25 @@
     min-width: */
   }
 
-  /* another class for the specific input, input.class */
+  input[type="date"] {
+    padding-right: 26px;
+  }
+
+  input#category-search, .friend-input {
+    height: 34px;
+    margin: 5px;
+  }
+
+  .create-trip-btn {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: 35px;
+   
+  }
+
+  .friend-btn {
+    margin-top: 5px;
+  }
 
   ul {
     list-style: none;
@@ -137,6 +155,7 @@
     height: 100%;
     width: 100%;
   }
+
   .carousel-inner img {
     height: 500px;
     width: 500px;
@@ -193,7 +212,8 @@
     background-color: white;
   }
 
-  .outer-container{
+  /* container to add scrollbar to weather/homepage */
+  .outer-container {
     width:45%;
     height:500PX;
     FLOAT: left;
@@ -202,24 +222,37 @@
     overflow: scroll;
     }
 
-    .information-box, .invite-container{
-      border: 2px white solid;
-      border-radius: 10px;
-      padding: 10px;
+  .outer-trip-container {
+    width:45%;
+    height:500PX;
+    FLOAT: left;
+    margin-top: -10px;
+    padding: 1%;
+    overflow: scroll;
     }
 
-    .activity-title, .calendar-title, .weather-title, .welcome-title, .invited-title {
-      box-shadow: 0 8px 8px -4px #add8e6;
-    }
+  .information-box, .invite-container{
+    border: 2px white solid;
+    border-radius: 10px;
+    padding: 10px;
+  }
 
-    .photo-title {
-      box-shadow: 0 8px 8px -4px lightblue;
-      margin-bottom: 20px;
-    }
+  .activity-title, .calendar-title, .weather-title, .welcome-title, .invited-title {
+    box-shadow: 0 8px 8px -4px #add8e6;
+  }
 
-    .trip-plan {
-      margin-left: 30px;
-    }
+  .photo-title {
+    box-shadow: 0 8px 8px -4px lightblue;
+    margin-bottom: 20px;
+  }
+
+  .trip-plan {
+    margin-left: 30px;
+  }
+
+  .details {
+    margin-left: 100px;
+  }
 
     
 
