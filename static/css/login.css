@@ -178,13 +178,6 @@
     border-radius: 5px;
   }
 
-  .friends-image img {
-    height: 500px;
-    width: 700px;
-    border: 2px white solid;
-    border-radius: 10px;
-  }
-
   .weather-container {
     border: white 3px solid;
     border-radius: 5px;
@@ -264,6 +257,10 @@
 
   .push {
     height: 280px;
+  }
+
+  .card-body ul {
+    margin-right: 25px;
   }
 
 
