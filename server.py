@@ -98,7 +98,6 @@ def create_trip():
     trip = Trip.create_trip(user_id, trip_name, city, start_date_converted, end_date_converted, trip_image)
     db.session.add(trip)
     db.session.commit()
-    flash("Trip created!")
 
     return redirect('/homepage')
 

@@ -29,9 +29,9 @@
   }
 
   .login-button {
-    padding: 10px 50px;
+    padding: 10px 30px;
     display: flex;
-    margin-left: 6px;
+    margin-left: 27px;
     border-radius: 10px;
     background-color: white;
   }
@@ -44,21 +44,17 @@
     background-color: hsl(194, 62%, 87%);
   }
  
-  input[type=text] {
+  input {
     padding:10px;
     border:0;
     border-radius: 5px;
     box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
     background-color: rgba(250, 246, 246, 0.79);
+    /* max-width: 300px maybe
+    min-width: */
   }
 
-  input[type=password] {
-    padding:10px;
-    border:0;
-    border-radius: 5px;
-    box-shadow:0 0 15px 4px rgba(0,0,0,0.06);
-    background-color: rgba(250, 246, 246, 0.79);
-  }
+  /* another class for the specific input, input.class */
 
   ul {
     list-style: none;
