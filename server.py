@@ -294,7 +294,8 @@ def main_marker_info():
         coords.append({
             'lat': location.latitude,
             'lng': location.longitude,
-            'trip_name': city['trip_name']
+            'trip_name': city['trip_name'],
+            'city_name': city['city_name']
         })
         
     return jsonify(coords)
