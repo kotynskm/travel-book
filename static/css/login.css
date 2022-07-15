@@ -40,6 +40,10 @@
     text-align: center;
   }
 
+  .title-sub {
+    margin-left: 6px;
+  }
+
   .btn-light:hover {
     background-color: hsl(194, 62%, 87%);
   }
