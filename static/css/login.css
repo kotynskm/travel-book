@@ -68,6 +68,11 @@
    
   }
 
+  .active-submit {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+
   .friend-btn {
     margin-top: 5px;
   }
@@ -77,8 +82,8 @@
   }
 
   .trip-btn {
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
   #category-search {
@@ -175,6 +180,7 @@
     transform: translate(-50%, -50%);
     background-color: rgba(0, 0, 0, 0.503);
     padding: 5px;
+    margin-left: 7px;
     border-radius: 5px;
   }
 
@@ -253,10 +259,6 @@
     padding: 15px;
     margin-top: 20px;
     flex-shrink: 0;
-  }
-
-  .push {
-    height: 280px;
   }
 
   .card-body ul {
