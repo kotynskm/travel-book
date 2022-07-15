@@ -78,8 +78,8 @@ function construct(data){
     const category = data.categories[0].title
 
 
-    return `<div class="information-box"><h4>${name} (${category})</h4><br><h5>Price: ${price}<br>Business Rating: ${rating}<br>Reviews: ${reviewCount}<br>
-    <h5>Address: ${location}<br>Phone: ${phone}<br>Hours: ${getHours(data)}
+    return `<div class="information-box"><h4>${name} (${category})</h4><br><h5>Price: ${price}<br>Business Rating: ${rating}<br><br>
+    <h5>Address: ${location}<br>Phone: ${phone}<br><br>Hours: ${getHours(data)}
     </h5><br><h5>Photos: </h5><img src="${firstImageURL}" width="300" height="300"> <img src="${secondImageURL}" width="300" height="300"></div>`
 
 }

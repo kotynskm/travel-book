@@ -1,3 +1,15 @@
+// helper function to format phone number for display marker
+function formatPhoneNumber(phoneNumberString) {
+  var cleaned = ('' + phoneNumberString).replace(/\D/g, '');
+  var match = cleaned.match(/^(1|)?(\d{3})(\d{3})(\d{4})$/);
+  if (match) {
+    var intlCode = (match[1] ? '+1 ' : '');
+    return [intlCode, '(', match[2], ') ', match[3], '-', match[4]].join('');
+  }
+  return null;
+}
+
+
 function initMap() {
     // location to create initial center
     const sf = { lat: 37.601773, lng: -122.20287 };
@@ -25,7 +37,7 @@ function initMap() {
           map: map,
         });
       // create an info window for each map marker
-        const markerInfo = `<h5>${marker.name}</h5><h6>Address: ${marker.address}${marker.zipcode}</h6><h6>Phone: ${marker.phone}</h6>`;
+        const markerInfo = `<h5>${marker.name}</h5><h6>Address: ${marker.address}${marker.zipcode}</h6><h6>Phone: ${formatPhoneNumber(marker.phone.slice(2))}</h6>`;
     
         // const infoWindow = new google.maps.InfoWindow({
         //   content: markerInfo,

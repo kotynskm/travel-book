@@ -9,7 +9,7 @@
 <div class="row">
 
     <div class="col">
-    <h2>Current Weather</h2>
+    <h2 class="cursive">Current Weather</h2>
     <div class="current-container">
     <img src="http://openweathermap.org/img/wn/{{ data.current.weather[0].icon }}@4x.png">
     <ul>
@@ -24,7 +24,7 @@
     </div>
 
     <div class="outer-container">
-    <h2>Daily Weather (Next 8 Days)</h2>
+    <h2 class="cursive">Daily Weather (Next 8 Days)</h2>
     <ul>
         {% for day in data.daily %}
             <div class="weather-container">

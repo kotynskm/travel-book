@@ -139,7 +139,7 @@
     padding: 10px;
   }
 
-  span {
+  span, .cursive {
     font-family: 'Satisfy', cursive;
   }
 
@@ -214,6 +214,9 @@
     background-color: white;
   }
 
+  .calendar-text {
+    text-align: left;
+  }
   /* container to add scrollbar to weather/homepage */
   .outer-container {
     width:45%;

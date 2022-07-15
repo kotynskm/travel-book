@@ -13,7 +13,7 @@
   
 <div class="col">
 <h1 class="photo-title">Photos for {{trip.trip_name}}</h1>
-<h2>Add a photo</h2>
+<h2 class="cursive">Add a photo</h2>
 <form action="/upload-photo/{{ trip.trip_id }}" method="POST" enctype="multipart/form-data">
     <input type="file" name="my-file">
     <button class="btn btn-light" type="submit">Upload photo</button>
