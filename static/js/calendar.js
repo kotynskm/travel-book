@@ -11,6 +11,7 @@ function draw_calendar(data, trip_start){
         right: 'dayGridMonth,timeGridWeek,timeGridDay'
       },
       events: data,
+      eventColor: '#79cae5'
     });
 
     calendar.render();
