@@ -1,0 +1,11 @@
+ footer {
+    color: black;
+    background-color: white;
+    text-align: center;
+    bottom: 0;
+ }
+
+ .push {
+    height: 280px;
+ }
+
