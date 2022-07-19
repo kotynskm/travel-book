@@ -11,9 +11,10 @@ Travel Book is a fullstack itinerary application for planning and organizing tri
 **Languages:** Python, JavaScript (AJAX, JSON), HTML, CSS, SQL  
 **Frameworks & Libraries:** Flask, jQuery, Bootstrap, Jinja, SQLAlchemy ORM  
 **Database & Industry Tools:** PostgreSQL, Git, GitHub, Command Line
+**APIs:** Google Maps, Yelp Fusion, OpenWeather, Cloudinary
 
 # <a name="about"></a>Learn More About the Developer
-**GitHub URL:** https://github.com/kotynskm/travel-book  
+**GitHub:** https://github.com/kotynskm/travel-book  
 **LinkedIn:** https://www.linkedin.com/in/kkotynski
 **Medium:** https://medium.com/@k.kotynski
 
@@ -24,6 +25,11 @@ Travel Book is a fullstack itinerary application for planning and organizing tri
 - [References](#references)
 
 ## <a name="features"></a>Features
+#### Create a trip/view trips
+<img src="/static/img/homepage.png" align="right" width="50%">
+<img src="/static/img/tripcard.png" align="right" width="50%">
+<img src="/static/img/homepage-map.png" align="right" width="50%">
+A user can create a trip, view trips/invited trips on the homepage. A google map with markers for each trip is displayed on the page using the Google Maps API and JavaScript. When the user creates a new trip, the information from the form is sent to the server as a POST request, and the trip cards are displayed on the page using React.
 
 ## <a name="installation"></a>Installation
 To run Travel Book on your local machine:
