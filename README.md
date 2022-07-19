@@ -27,8 +27,17 @@ Travel Book is a fullstack itinerary application for planning and organizing tri
 ## <a name="features"></a>Features
 #### Create a trip/view trips
 <img src="/static/img/homepage.png" align="right" width="50%">
+***
 <img src="/static/img/homepage-map.png" align="right" width="50%">
-A user can create a trip, view trips/invited trips on the homepage. A google map with markers for each trip is displayed on the page using the Google Maps API and JavaScript. When the user creates a new trip, the information from the form is sent to the server as a POST request, and the trip cards are displayed on the page using React.
+A user can create a trip, view trips/invited trips on the homepage. A google map with markers for each trip is displayed on the page using the Google Maps API, JavaScript and geolocation. When the user creates a new trip, the information from the form is sent to the server as a POST request, and the trip cards are displayed on the page using React.
+
+#### Plan itinerary
+<img src="/static/img/tripitinerarycards.png" align="right" width="50%">
+***
+<img src="/static/img/activities.png" align="right" width="50%">
+***
+<img src="/static/img/calendar.png" align="right" width="50%">
+A user can select/search top rated activities which populates results using the Yelp Fusion API. A google map with info markers for each activity selected is displayed on the page. The user can navigate to the calendar page to schedule activities. This feature was implemented using FullCalendar and JavaScript. The user may also upload photos. This feature was implemented using the Cloudinary API and BootStrap to create a photo carousel. The user may also check the daily and upcoming weather. This feature was implemented using the OpenWeather API and geolocation. Additional features include adding notes to the trip, which may be used for airline/hotel information, or reminders. The user may also invite friends to their trip, and invited users will be able to view the trip details.
 
 ## <a name="installation"></a>Installation
 To run Travel Book on your local machine:
