@@ -27,7 +27,6 @@ Travel Book is a fullstack itinerary application for planning and organizing tri
 ## <a name="features"></a>Features
 #### Create a trip/view trips
 <img src="/static/img/homepage.png" align="right" width="50%">
-<p>&nbsp;</p>
 <img src="/static/img/homepage-map.png" align="right" width="50%">
 A user can create a trip, view trips/invited trips on the homepage. A google map with markers for each trip is displayed on the page using the Google Maps API, JavaScript and geolocation. When the user creates a new trip, the information from the form is sent to the server as a POST request, and the trip cards are displayed on the page using React.
 
