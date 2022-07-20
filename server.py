@@ -22,6 +22,13 @@ OPEN_WEATHER_KEY = os.environ['OPEN_WEATHER_KEY']
 
 app = Flask(__name__)
 app.secret_key = 'SECRET_KEY'
+ON_HEROKU = os.environ.get('ON_HEROKU')
+
+if ON_HEROKU:
+    # get the heroku port
+    port = int(os.environ.get('PORT', 33069))  # as per OP comments default is 17995
+else:
+    port = 5000
 
 # --- login, create user, registration routes ---
 @app.route('/')
@@ -504,4 +511,4 @@ def redirect_homepage():
 
 if __name__ == '__main__':
     connect_to_db(app)
-    app.run (debug=True, host='0.0.0.0')
+    app.run (debug=True, host='0.0.0.0', port=port)
