@@ -510,5 +510,16 @@ def redirect_homepage():
 
 
 if __name__ == '__main__':
-    connect_to_db(app)
+    # connect_to_db(app)
+    
+    app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql:///travel_book"
+    app.config["SQLALCHEMY_ECHO"] = False
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+
+    db.app = app
+    db.init_app(app)
+
+    print("Connected to the db!")
+    print(app.config)
+
     app.run (debug=True, host='0.0.0.0', port=port)

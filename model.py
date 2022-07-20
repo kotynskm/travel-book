@@ -208,6 +208,7 @@ def connect_to_db(flask_app, db_uri="postgresql:///travel_book", echo=False):
     db.init_app(flask_app)
 
     print("Connected to the db!")
+    print(flask_app.config)
 
 
 if __name__ == "__main__":
