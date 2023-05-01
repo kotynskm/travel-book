@@ -8,8 +8,6 @@
 
 Travel Book is a fullstack itinerary application for planning and organizing trips. The user can create trips, add activities, notes, photos, and friends to their trip. Furthermore, the user can view and schedule their activities on a calendar, as well as view the weather in the city where they are traveling to assist them in planning their itinerary.
 
-View demo site here: http://35.90.45.98/
-
 ## Technologies
 
 **Languages:** Python, JavaScript (AJAX, JSON), HTML, CSS, SQL  
@@ -21,7 +19,6 @@ View demo site here: http://35.90.45.98/
 
 **GitHub:** https://github.com/kotynskm/travel-book  
 **LinkedIn:** https://www.linkedin.com/in/kkotynski
-**Medium:** https://medium.com/@k.kotynski
 
 # Table of Contents
 
